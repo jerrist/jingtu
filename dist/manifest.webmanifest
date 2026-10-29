@@ -1,0 +1,10 @@
+{
+  "name": "经途 · 中级经济师人力方向刷题",
+  "short_name": "经途刷题",
+  "description": "经济基础知识与人力资源管理专业双科刷题工具",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f5f1e8",
+  "theme_color": "#173b3f",
+  "icons": [{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

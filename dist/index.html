@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#173b3f" />
+  <meta name="description" content="中级经济师人力资源方向双科刷题、错题复习与模拟考试工具" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>经途 · 中级经济师人力方向刷题</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="主导航">
+      <a class="brand" href="#home" data-nav="home" aria-label="经途首页">
+        <span class="brand-mark">经</span>
+        <span><b>经途</b><small>稳稳走过每一章</small></span>
+      </a>
+      <nav class="side-nav">
+        <button class="nav-item active" data-view="home"><span>⌂</span>今日学习</button>
+        <button class="nav-item" data-view="practice"><span>◫</span>章节刷题</button>
+        <button class="nav-item" data-view="review"><span>↻</span>错题复习</button>
+        <button class="nav-item" data-view="exam"><span>◷</span>模拟考试</button>
+        <button class="nav-item" data-view="stats"><span>⌁</span>学习报告</button>
+      </nav>
+      <div class="sidebar-foot">
+        <div class="exam-countdown"><span>距计划考试日</span><strong id="days-left">— 天</strong></div>
+        <button class="text-button" id="open-settings">设置计划</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" id="today-label"></p>
+          <h1 id="view-title">今天，向前一小步</h1>
+        </div>
+        <div class="top-actions">
+          <span class="streak-pill" title="连续学习天数">🔥 <b id="streak">0</b> 天</span>
+          <button class="avatar" id="header-settings" aria-label="打开设置">HR</button>
+        </div>
+      </header>
+
+      <section class="view active" id="view-home" aria-labelledby="view-title">
+        <div class="hero-grid">
+          <article class="daily-card">
+            <div class="daily-copy">
+              <span class="soft-tag">今日计划</span>
+              <h2>先完成 <em id="remaining-count">20</em> 道题，<br />再安心去忙别的。</h2>
+              <p id="daily-message">系统会优先安排薄弱知识点和到期错题。</p>
+              <button class="primary-button" id="start-daily">开始今日刷题 <span>→</span></button>
+            </div>
+            <div class="progress-orbit" aria-label="今日完成进度">
+              <svg viewBox="0 0 160 160" role="img">
+                <circle class="orbit-bg" cx="80" cy="80" r="66"></circle>
+                <circle class="orbit-progress" id="daily-progress-ring" cx="80" cy="80" r="66"></circle>
+              </svg>
+              <div><strong id="daily-done">0</strong><span>/ <b id="daily-goal">20</b> 题</span></div>
+            </div>
+          </article>
+
+          <article class="focus-card">
+            <div class="card-head"><span class="card-icon amber">!</span><span>重点关注</span></div>
+            <h3 id="weak-title">还没有薄弱点</h3>
+            <p id="weak-copy">完成几道题后，这里会自动识别需要加强的章节。</p>
+            <button class="link-button" id="practice-weak">去专项练习 →</button>
+          </article>
+        </div>
+
+        <div class="section-heading">
+          <div><p class="eyebrow">双科进度</p><h2>两条线，都要稳</h2></div>
+          <button class="ghost-button" data-go="stats">查看完整报告</button>
+        </div>
+        <div class="subject-grid" id="subject-grid"></div>
+
+        <div class="lower-grid">
+          <article class="panel review-panel">
+            <div class="panel-title"><div><p class="eyebrow">遗忘曲线</p><h3>今天该复习的错题</h3></div><span class="number-badge" id="due-count">0</span></div>
+            <div class="review-empty" id="review-preview">
+              <span>✓</span><div><b>暂时没有到期错题</b><p>做错的题会在合适的时间回来找你。</p></div>
+            </div>
+            <button class="secondary-button full" id="review-now">进入错题本</button>
+          </article>
+          <article class="panel tip-panel">
+            <p class="eyebrow">今日小贴士 · 人力资源</p>
+            <blockquote>“效度”回答测得准不准，<br />“信度”回答测得稳不稳。</blockquote>
+            <p>把容易混淆的概念放在一起对比，比单独背诵更牢。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="view" id="view-practice">
+        <div id="practice-setup">
+          <div class="section-heading compact"><div><p class="eyebrow">自由练习</p><h2>今天想练哪一块？</h2></div></div>
+          <div class="setup-grid">
+            <button class="setup-card selected" data-subject="all"><span class="setup-icon">双</span><b>双科混合</b><small>根据薄弱点智能出题</small></button>
+            <button class="setup-card" data-subject="经济基础知识"><span class="setup-icon blue">经</span><b>经济基础知识</b><small>经济、财政、金融、统计、会计、法律</small></button>
+            <button class="setup-card" data-subject="人力资源管理"><span class="setup-icon coral">人</span><b>人力资源管理</b><small>组织、战略、招聘、绩效、薪酬、劳动关系</small></button>
+          </div>
+          <div class="chapter-picker">
+            <label for="chapter-select">章节范围</label>
+            <select id="chapter-select"><option value="all">全部章节</option></select>
+          </div>
+          <button class="primary-button large" id="start-practice">开始 10 题练习 <span>→</span></button>
+        </div>
+        <div id="quiz-stage" class="hidden"></div>
+      </section>
+
+      <section class="view" id="view-review">
+        <div class="section-heading compact"><div><p class="eyebrow">错题闭环</p><h2>错过一次，就多懂一点</h2></div><span class="subtle" id="wrong-summary"></span></div>
+        <div class="reason-filters" id="reason-filters"></div>
+        <div class="wrong-list" id="wrong-list"></div>
+      </section>
+
+      <section class="view" id="view-exam">
+        <div id="exam-intro" class="exam-intro">
+          <span class="exam-seal">模</span>
+          <p class="eyebrow">15 分钟小模考</p>
+          <h2>关掉提示，检验真正掌握</h2>
+          <p>随机抽取双科 10 道单选题。交卷前不显示答案，支持题卡跳转和倒计时自动交卷。</p>
+          <div class="exam-rules"><span><b>10</b> 道题</span><span><b>15</b> 分钟</span><span><b>10</b> 分满分</span></div>
+          <button class="primary-button large" id="start-exam">开始模拟考试 <span>→</span></button>
+        </div>
+        <div id="exam-stage" class="hidden"></div>
+      </section>
+
+      <section class="view" id="view-stats">
+        <div class="section-heading compact"><div><p class="eyebrow">学习报告</p><h2>看清进步，也看清缺口</h2></div><button class="ghost-button" id="export-data">导出学习数据</button></div>
+        <div class="stat-strip" id="stat-strip"></div>
+        <div class="report-grid">
+          <article class="panel"><div class="panel-title"><h3>章节掌握度</h3><span class="legend"><i></i>答题正确率</span></div><div id="chapter-bars" class="chapter-bars"></div></article>
+          <article class="panel"><div class="panel-title"><h3>错误原因分布</h3></div><div id="reason-chart" class="reason-chart"></div></article>
+        </div>
+        <div class="panel data-note"><span>i</span><p><b>关于第一版数据</b><br />所有学习记录都保存在当前浏览器中，不会上传。清理浏览器数据会同时清除进度，可定期导出备份。</p></div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="移动端导航">
+    <button class="active" data-view="home"><span>⌂</span>今日</button>
+    <button data-view="practice"><span>◫</span>刷题</button>
+    <button data-view="review"><span>↻</span>错题</button>
+    <button data-view="exam"><span>◷</span>模考</button>
+    <button data-view="stats"><span>⌁</span>报告</button>
+  </nav>
+
+  <dialog id="settings-dialog">
+    <form method="dialog" id="settings-form">
+      <div class="dialog-head"><div><p class="eyebrow">学习计划</p><h2>把目标定得刚刚好</h2></div><button value="cancel" class="close-button" aria-label="关闭">×</button></div>
+      <label>每日目标题数<input type="number" id="goal-input" min="5" max="100" step="5" /></label>
+      <label>计划考试日期<input type="date" id="exam-date-input" /></label>
+      <p class="form-hint">第一版数据只保存在当前浏览器。</p>
+      <button value="default" class="primary-button full" id="save-settings">保存计划</button>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
