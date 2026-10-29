@@ -101,6 +101,7 @@
             <button class="setup-card" data-subject="经济基础知识"><span class="setup-icon blue">经</span><b>经济基础知识</b><small>经济、财政、金融、统计、会计、法律</small></button>
             <button class="setup-card" data-subject="人力资源管理"><span class="setup-icon coral">人</span><b>人力资源管理</b><small>组织、战略、招聘、绩效、薪酬、劳动关系</small></button>
           </div>
+          <div class="bank-status" id="bank-status" aria-live="polite"></div>
           <div class="chapter-picker">
             <label for="chapter-select">章节范围</label>
             <select id="chapter-select"><option value="all">全部章节</option></select>
@@ -121,7 +122,7 @@
           <span class="exam-seal">模</span>
           <p class="eyebrow">15 分钟小模考</p>
           <h2>关掉提示，检验真正掌握</h2>
-          <p>随机抽取双科 10 道单选题。交卷前不显示答案，支持题卡跳转和倒计时自动交卷。</p>
+          <p>随机抽取双科 10 道题，支持单选、多选和案例材料。交卷前不显示答案，支持题卡跳转和倒计时自动交卷。</p>
           <div class="exam-rules"><span><b>10</b> 道题</span><span><b>15</b> 分钟</span><span><b>10</b> 分满分</span></div>
           <button class="primary-button large" id="start-exam">开始模拟考试 <span>→</span></button>
         </div>
@@ -159,7 +160,6 @@
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="questions.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 const $ = (s, root = document) => root.querySelector(s);
 const $$ = (s, root = document) => [...root.querySelectorAll(s)];
-const QUESTIONS = window.QUESTION_BANK;
+let QUESTIONS = [];
+let BANK_META = {};
 const REASONS = ["知识点不会", "概念混淆", "审题失误", "计算/推理错误"];
 const DEFAULT_STATE = { dailyGoal: 20, examDate: "2026-11-08", records: {}, daily: {}, streak: 0, lastStudy: null, mastered: [], exams: [] };
 let state = loadState();
@@ -27,6 +28,27 @@ function dueQuestions() { const now = localDate(); return wrongQuestions().filte
 function daysFromNow(n) { const d = new Date(); d.setDate(d.getDate() + n); return localDate(d); }
 function toast(msg) { const el = $("#toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2200); }
 function shuffle(list) { return [...list].sort(() => Math.random() - .5); }
+function optionText(option) { return typeof option === "string" ? option : option.text; }
+function optionId(option, index) { return typeof option === "string" ? String.fromCharCode(65 + index) : option.id; }
+function answerIds(question) { return question.answers || [String.fromCharCode(65 + question.answer)]; }
+function isMultiple(question) { return ["multiple", "case-multiple"].includes(question.type); }
+function isCorrectAnswer(question, selected = []) {
+  const expected = [...answerIds(question)].sort();
+  const actual = [...selected].sort();
+  return expected.length === actual.length && expected.every((id, index) => id === actual[index]);
+}
+function typeLabel(question) {
+  return ({single:"单选题", multiple:"多选题", "case-single":"案例单选", "case-multiple":"案例多选"})[question.type] || "选择题";
+}
+function explanationText(question) { return question.explanation?.summary || question.explain || "暂无解析"; }
+async function loadQuestionBank() {
+  const response = await fetch("data/questions.json", { cache: "no-cache" });
+  if (!response.ok) throw new Error(`题库加载失败 (${response.status})`);
+  const bank = await response.json();
+  if (!bank.schemaVersion || !bank.bankVersion || !Array.isArray(bank.questions)) throw new Error("题库结构无效");
+  BANK_META = bank;
+  QUESTIONS = bank.questions.filter(question => question.review?.status !== "retired");
+}
 
 function markStudy() {
   const today = localDate();
@@ -79,24 +101,34 @@ function updateChapterPicker() {
 
 function startQuiz({questions, mode="practice"}) {
   if (!questions.length) { toast("这个范围暂时没有可练习题目"); return; }
-  activeQuiz = {questions: shuffle(questions).slice(0, 10), index:0, score:0, answered:false, mode};
+  activeQuiz = {questions: shuffle(questions).slice(0, 10), index:0, score:0, answered:false, selected:[], mode};
   $("#practice-setup").classList.add("hidden"); $("#quiz-stage").classList.remove("hidden"); renderQuizQuestion();
 }
 
 function renderQuizQuestion() {
-  const {questions, index, answered} = activeQuiz; const q = questions[index]; const rec = state.records[q.id] || {};
-  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 退出练习</button><span class="progress-text">第 ${index + 1} / ${questions.length} 题</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div><h2>${q.stem}</h2><div class="option-list">${q.options.map((o,i) => `<button class="option" data-option="${i}"><span class="option-letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join("")}</div><div id="answer-feedback"></div></article></div>`;
+  const {questions, index} = activeQuiz; const q = questions[index]; const rec = state.records[q.id] || {};
+  activeQuiz.selected = [];
+  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 退出练习</button><span class="progress-text">第 ${index + 1} / ${questions.length} 题</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">难度 ${q.difficulty || 2}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}<h2>${q.stem}</h2>${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项后确认</div>` : ""}<div class="option-list">${q.options.map((o,i) => { const id=optionId(o,i); return `<button class="option" data-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`; }).join("")}</div>${isMultiple(q) ? `<div class="quiz-actions"><button class="primary-button" id="confirm-answer" disabled>确认答案 <span>→</span></button></div>` : ""}<div id="answer-feedback"></div></article></div>`;
   $("#quit-quiz").onclick = quitQuiz;
-  $$('[data-option]', $("#quiz-stage")).forEach(b => b.onclick = () => answerQuiz(Number(b.dataset.option)));
+  $$('[data-option]', $("#quiz-stage")).forEach(b => b.onclick = () => isMultiple(q) ? toggleQuizOption(b.dataset.option, b) : answerQuiz([b.dataset.option]));
+  if (isMultiple(q)) $("#confirm-answer").onclick = () => answerQuiz(activeQuiz.selected);
 }
 
-function answerQuiz(choice) {
+function toggleQuizOption(id, button) {
+  activeQuiz.selected = activeQuiz.selected.includes(id) ? activeQuiz.selected.filter(value => value !== id) : [...activeQuiz.selected, id];
+  button.classList.toggle("selected", activeQuiz.selected.includes(id));
+  $("#confirm-answer").disabled = activeQuiz.selected.length === 0;
+}
+
+function answerQuiz(selected) {
   if (activeQuiz.answered) return; activeQuiz.answered = true;
-  const q = activeQuiz.questions[activeQuiz.index], correct = choice === q.answer;
+  const q = activeQuiz.questions[activeQuiz.index], correct = isCorrectAnswer(q, selected);
   if (correct) activeQuiz.score++;
-  $$('[data-option]', $("#quiz-stage")).forEach((b, i) => { b.disabled = true; if (i === q.answer) b.classList.add("correct"); if (i === choice && !correct) b.classList.add("wrong"); });
+  const expected = answerIds(q);
+  $$('[data-option]', $("#quiz-stage")).forEach((b) => { const id=b.dataset.option; b.disabled = true; if (expected.includes(id)) b.classList.add("correct"); if (selected.includes(id) && !expected.includes(id)) b.classList.add("wrong"); });
+  if ($("#confirm-answer")) $("#confirm-answer").remove();
   recordAnswer(q, correct);
-  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${String.fromCharCode(65+q.answer)}。`}</h4><p>${q.explain}</p>${correct ? "" : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="primary-button" id="next-question">${activeQuiz.index === activeQuiz.questions.length-1 ? "查看结果" : "下一题"} <span>→</span></button></div>`;
+  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${expected.join("、")}。`}</h4><p>${explanationText(q)}</p>${q.explanation?.memoryTip ? `<p><b>记忆提示：</b>${q.explanation.memoryTip}</p>` : ""}${correct ? "" : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="primary-button" id="next-question">${activeQuiz.index === activeQuiz.questions.length-1 ? "查看结果" : "下一题"} <span>→</span></button></div>`;
   $$('[data-reason]').forEach(b => b.onclick = () => { $$('[data-reason]').forEach(x => x.classList.remove("active")); b.classList.add("active"); state.records[q.id].reason = b.dataset.reason; saveState(); toast("已记录错因"); });
   $("#next-question").onclick = nextQuiz;
 }
@@ -109,7 +141,7 @@ function recordAnswer(q, correct) {
 }
 
 function nextQuiz() {
-  if (activeQuiz.index < activeQuiz.questions.length - 1) { activeQuiz.index++; activeQuiz.answered = false; renderQuizQuestion(); }
+  if (activeQuiz.index < activeQuiz.questions.length - 1) { activeQuiz.index++; activeQuiz.answered = false; activeQuiz.selected = []; renderQuizQuestion(); }
   else renderQuizResult();
 }
 function renderQuizResult() {
@@ -136,18 +168,18 @@ function startExam() {
 }
 function updateTimer(){ const m=String(Math.floor(activeExam.remaining/60)).padStart(2,"0"),s=String(activeExam.remaining%60).padStart(2,"0"); const el=$("#exam-timer"); if(el) el.textContent=`${m}:${s}`; }
 function renderExam() {
-  const q=activeExam.questions[activeExam.index], chosen=activeExam.answers[q.id];
-  $("#exam-stage").innerHTML=`<div class="exam-top"><button class="ghost-button" id="quit-exam">退出模考</button><span class="timer" id="exam-timer"></span></div><div class="exam-grid"><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">第 ${activeExam.index+1} 题</span></div><h2>${q.stem}</h2><div class="option-list">${q.options.map((o,i)=>`<button class="option ${chosen===i?"selected":""}" data-exam-option="${i}"><span class="option-letter">${String.fromCharCode(65+i)}</span><span>${o}</span></button>`).join("")}</div><div class="quiz-actions">${activeExam.index?`<button class="ghost-button" id="exam-prev">上一题</button>`:""}<button class="primary-button" id="exam-next">${activeExam.index===9?"交卷":"下一题"} <span>→</span></button></div></article><aside class="answer-sheet"><h3>答题卡</h3><div class="sheet-grid">${activeExam.questions.map((x,i)=>`<button class="sheet-button ${activeExam.answers[x.id]!==undefined?"done":""} ${i===activeExam.index?"current":""}" data-sheet="${i}">${i+1}</button>`).join("")}</div></aside></div>`;
+  const q=activeExam.questions[activeExam.index], chosen=activeExam.answers[q.id] || [];
+  $("#exam-stage").innerHTML=`<div class="exam-top"><button class="ghost-button" id="quit-exam">退出模考</button><span class="timer" id="exam-timer"></span></div><div class="exam-grid"><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">第 ${activeExam.index+1} 题</span></div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}<h2>${q.stem}</h2>${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项</div>` : ""}<div class="option-list">${q.options.map((o,i)=>{const id=optionId(o,i);return `<button class="option ${chosen.includes(id)?"selected":""}" data-exam-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`;}).join("")}</div><div class="quiz-actions">${activeExam.index?`<button class="ghost-button" id="exam-prev">上一题</button>`:""}<button class="primary-button" id="exam-next">${activeExam.index===activeExam.questions.length-1?"交卷":"下一题"} <span>→</span></button></div></article><aside class="answer-sheet"><h3>答题卡</h3><div class="sheet-grid">${activeExam.questions.map((x,i)=>`<button class="sheet-button ${(activeExam.answers[x.id] || []).length?"done":""} ${i===activeExam.index?"current":""}" data-sheet="${i}">${i+1}</button>`).join("")}</div></aside></div>`;
   updateTimer();
-  $$('[data-exam-option]').forEach(b=>b.onclick=()=>{activeExam.answers[q.id]=Number(b.dataset.examOption);renderExam();});
+  $$('[data-exam-option]').forEach(b=>b.onclick=()=>{const id=b.dataset.examOption;if(isMultiple(q)){const values=activeExam.answers[q.id]||[];activeExam.answers[q.id]=values.includes(id)?values.filter(value=>value!==id):[...values,id];}else activeExam.answers[q.id]=[id];renderExam();});
   $$('[data-sheet]').forEach(b=>b.onclick=()=>{activeExam.index=Number(b.dataset.sheet);renderExam();});
   $("#exam-prev") && ($("#exam-prev").onclick=()=>{activeExam.index--;renderExam();});
-  $("#exam-next").onclick=()=> activeExam.index===9 ? submitExam() : (activeExam.index++,renderExam());
+  $("#exam-next").onclick=()=> activeExam.index===activeExam.questions.length-1 ? submitExam() : (activeExam.index++,renderExam());
   $("#quit-exam").onclick=quitExam;
 }
 function submitExam(){
   if(!activeExam)return; clearInterval(examTimer); let score=0;
-  activeExam.questions.forEach(q=>{const ok=activeExam.answers[q.id]===q.answer;if(ok)score++;recordAnswer(q,ok);});
+  activeExam.questions.forEach(q=>{const ok=isCorrectAnswer(q,activeExam.answers[q.id]||[]);if(ok)score++;recordAnswer(q,ok);});
   state.exams.push({date:localDate(),score,total:10});saveState();
   $("#exam-stage").innerHTML=`<div class="quiz-shell"><div class="result-card"><div class="result-score"><strong>${score}</strong><small>/ 10 分</small></div><h2>${score>=8?"考场状态不错":"模考的价值，是提前暴露问题"}</h2><p>本次作答 ${Object.keys(activeExam.answers).length} 题，答对 ${score} 题。错误题目已进入错题复习。</p><button class="primary-button" id="finish-exam">完成并查看报告 <span>→</span></button></div></div>`;
   $("#finish-exam").onclick=()=>{quitExam();switchView("stats");};
@@ -172,12 +204,15 @@ function exportData(){
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`经途学习数据-${localDate()}.json`;a.click();URL.revokeObjectURL(a.href);toast("学习数据已导出");
 }
 
-function init(){
+async function init(){
+  await loadQuestionBank();
   const now=new Date();$("#today-label").textContent=now.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"long"});$("#streak").textContent=state.streak;
   $$('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
   $$('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
   $$('[data-subject]').forEach(b=>b.onclick=()=>{$$('[data-subject]').forEach(x=>x.classList.remove("selected"));b.classList.add("selected");practiceSubject=b.dataset.subject;updateChapterPicker();});
   updateChapterPicker();renderHome();
+  const draftCount=QUESTIONS.filter(q=>q.review?.status==="draft").length;
+  $("#bank-status").innerHTML=`<span>结构 v${BANK_META.schemaVersion}</span><span>题库 ${BANK_META.bankVersion}</span><span>${QUESTIONS.length} 道题</span><span>${draftCount} 道待审核</span>`;
   $("#start-daily").onclick=()=>{switchView("practice");const due=dueQuestions();const rest=QUESTIONS.filter(q=>!due.includes(q));startQuiz({questions:[...due,...shuffle(rest)].slice(0,10),mode:"daily"});};
   $("#start-practice").onclick=()=>{const ch=$("#chapter-select").value;startQuiz({questions:QUESTIONS.filter(q=>(practiceSubject==="all"||q.subject===practiceSubject)&&(ch==="all"||q.chapter===ch))});};
   $("#practice-weak").onclick=()=>{switchView("practice");const ch=$("#practice-weak").dataset.chapter;startQuiz({questions:QUESTIONS.filter(q=>ch==="all"||q.chapter===ch)});};
@@ -188,4 +223,7 @@ function init(){
   $("#save-settings").onclick=e=>{e.preventDefault();state.dailyGoal=Math.max(5,Math.min(100,Number($("#goal-input").value)||20));state.examDate=$("#exam-date-input").value||state.examDate;saveState();dialog.close();renderHome();toast("学习计划已更新");};
   if("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(()=>{});
 }
-init();
+init().catch(error=>{
+  console.error(error);
+  document.body.innerHTML=`<main class="main"><div class="empty-state"><span>!</span><b>题库暂时无法加载</b><p>${error.message}</p><button class="primary-button" onclick="location.reload()">重新加载</button></div></main>`;
+});
