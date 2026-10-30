@@ -73,6 +73,23 @@
           </article>
         </div>
 
+        <article class="bank-progress-card" aria-labelledby="bank-progress-title">
+          <div class="bank-progress-head">
+            <div>
+              <p class="eyebrow" id="progress-owner-label">本机题库进度</p>
+              <h2 id="bank-progress-title">已做 <strong id="bank-attempted">0</strong> / <span id="bank-total">0</span> 道</h2>
+            </div>
+            <span class="coverage-badge" id="bank-coverage">0%</span>
+          </div>
+          <div class="coverage-track" aria-label="题库覆盖率"><span id="bank-coverage-bar"></span></div>
+          <div class="bank-progress-metrics">
+            <div><span>总题数</span><strong id="metric-total">0</strong></div>
+            <div><span>已做题目</span><strong id="metric-attempted">0</strong></div>
+            <div><span>未做题目</span><strong id="metric-remaining">0</strong></div>
+            <div><span>累计作答</span><strong id="metric-attempts">0</strong></div>
+          </div>
+        </article>
+
         <div class="section-heading">
           <div><p class="eyebrow">双科进度</p><h2>两条线，都要稳</h2></div>
           <button class="ghost-button" data-go="stats">查看完整报告</button>

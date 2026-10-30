@@ -1,4 +1,4 @@
-const CACHE = "jingtu-v4";
+const CACHE = "jingtu-v5";
 const PRECACHE = [
   "./",
   "index.html",

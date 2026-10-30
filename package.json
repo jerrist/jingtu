@@ -9,6 +9,7 @@
     "bank:export": "node scripts/export-question-bank.cjs",
     "bank:validate": "node scripts/validate-question-bank.cjs",
     "bank:sync": "node scripts/sync-question-bank.cjs",
+    "bank:convert-public": "node scripts/convert-public-exams.cjs",
     "test:sw": "node scripts/test-service-worker.cjs",
     "preview": "node preview-server.cjs"
   },

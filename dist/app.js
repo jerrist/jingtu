@@ -31,6 +31,13 @@ function accuracy(filter = () => true) {
   QUESTIONS.filter(filter).forEach(q => { const r = state.records[q.id]; if (r) { total += r.attempts || 0; correct += r.correct || 0; }});
   return {total, correct, rate: total ? Math.round(correct / total * 100) : 0};
 }
+function questionProgress(filter = () => true) {
+  const questions = QUESTIONS.filter(filter);
+  const attempted = questions.filter(question => (state.records[question.id]?.attempts || 0) > 0).length;
+  const attempts = questions.reduce((sum, question) => sum + (state.records[question.id]?.attempts || 0), 0);
+  const total = questions.length;
+  return {total, attempted, remaining: Math.max(0, total - attempted), attempts, coverage: total ? Math.round(attempted / total * 100) : 0};
+}
 function wrongQuestions() { return QUESTIONS.filter(q => state.records[q.id]?.wrong > 0 && !state.mastered.includes(q.id)); }
 function dueQuestions() { const now = localDate(); return wrongQuestions().filter(q => !state.records[q.id].due || state.records[q.id].due <= now); }
 function daysFromNow(n) { const d = new Date(); d.setDate(d.getDate() + n); return localDate(d); }
@@ -136,6 +143,8 @@ function renderAccountUI() {
     $("#account-username-label").textContent = authState.user.username;
     $("#account-user-avatar").textContent = authState.user.username.slice(0, 1);
   } else setSyncStatus("本地模式");
+  const progressOwner = $("#progress-owner-label");
+  if (progressOwner) progressOwner.textContent = signedIn ? `${authState.user.username} 的题库进度` : "本机题库进度";
 }
 
 async function activateAccount(user) {
@@ -235,8 +244,18 @@ function renderHome() {
   $("#remaining-count").textContent = Math.max(0, goal - done);
   $("#daily-progress-ring").style.strokeDashoffset = 414.7 * (1 - pct / 100);
   $("#daily-message").textContent = done >= goal ? "今天的计划已完成，保持节奏比突击更重要。" : "系统会优先安排薄弱知识点和到期错题。";
+  const progress = questionProgress();
+  $("#bank-attempted").textContent = progress.attempted;
+  $("#bank-total").textContent = progress.total;
+  $("#bank-coverage").textContent = `${progress.coverage}%`;
+  $("#bank-coverage-bar").style.width = `${progress.coverage}%`;
+  $("#metric-total").textContent = progress.total;
+  $("#metric-attempted").textContent = progress.attempted;
+  $("#metric-remaining").textContent = progress.remaining;
+  $("#metric-attempts").textContent = progress.attempts;
+  $("#progress-owner-label").textContent = authState.user ? `${authState.user.username} 的题库进度` : "本机题库进度";
   const subjects = ["经济基础知识", "人力资源管理"];
-  $("#subject-grid").innerHTML = subjects.map((s, i) => { const a = accuracy(q => q.subject === s); return `<article class="subject-card ${i ? "hr" : "econ"}"><div class="subject-top"><span class="subject-symbol">${i ? "人" : "经"}</span><span class="subject-score">${a.rate}<small>%</small></span></div><h3>${s}</h3><p>${a.total ? `累计完成 ${a.total} 次作答` : "还未开始，今天就开个头"}</p><div class="mini-bar"><span style="width:${a.rate}%"></span></div></article>`; }).join("");
+  $("#subject-grid").innerHTML = subjects.map((s, i) => { const filter=q=>q.subject===s, a=accuracy(filter), p=questionProgress(filter); return `<article class="subject-card ${i ? "hr" : "econ"}"><div class="subject-top"><span class="subject-symbol">${i ? "人" : "经"}</span><span class="subject-score">${a.rate}<small>% 正确率</small></span></div><h3>${s}</h3><p>已做 ${p.attempted} / ${p.total} 道 · 累计作答 ${p.attempts} 次</p><div class="mini-bar" title="题库覆盖率 ${p.coverage}%"><span style="width:${p.coverage}%"></span></div></article>`; }).join("");
   const chapters = chapterStats().filter(x => x.total >= 2).sort((a,b) => a.rate - b.rate);
   const weak = chapters[0];
   $("#weak-title").textContent = weak ? weak.chapter : "还没有薄弱点";
@@ -350,8 +369,8 @@ function chapterStats(){
   return chapters.map(chapter=>({chapter,...accuracy(q=>q.chapter===chapter)})).filter(x=>x.total);
 }
 function renderStats(){
-  const all=accuracy(), wrong=wrongQuestions().length, examBest=state.exams.length?Math.max(...state.exams.map(x=>x.score)):0;
-  $("#stat-strip").innerHTML=[['累计作答',all.total+' 次'],['综合正确率',all.rate+'%'],['待掌握错题',wrong+' 道'],['模考最佳',examBest+'/10']].map(x=>`<div class="stat-tile"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+  const all=accuracy(), progress=questionProgress(), wrong=wrongQuestions().length, examBest=state.exams.length?Math.max(...state.exams.map(x=>x.score)):0;
+  $("#stat-strip").innerHTML=[['题库覆盖',progress.attempted+'/'+progress.total],['累计作答',all.total+' 次'],['综合正确率',all.rate+'%'],['待掌握错题',wrong+' 道'],['模考最佳',examBest+'/10']].map(x=>`<div class="stat-tile"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
   const chapters=chapterStats().sort((a,b)=>b.total-a.total).slice(0,10);
   $("#chapter-bars").innerHTML=chapters.length?chapters.map(x=>`<div class="bar-row"><span title="${x.chapter}">${x.chapter.length>8?x.chapter.slice(0,8)+'…':x.chapter}</span><div class="bar-track"><span style="width:${x.rate}%"></span></div><b>${x.rate}%</b></div>`).join(""):`<div class="empty-state"><span>⌁</span><p>完成练习后生成章节分析。</p></div>`;
   const counts=REASONS.map(r=>({r,n:Object.values(state.records).filter(x=>x.reason===r).length})), max=Math.max(1,...counts.map(x=>x.n));

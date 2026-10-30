@@ -13,6 +13,7 @@
 - `dist/data/questions.json`：供网页读取的发布文件。
 
 详细操作和日常建议见 [`题库维护指南.md`](题库维护指南.md)。
+已导入的免费公开题源、数量及未导入原因见 [`FREE_SOURCE_LOG.md`](FREE_SOURCE_LOG.md)。
 
 ## 初始化与同步
 

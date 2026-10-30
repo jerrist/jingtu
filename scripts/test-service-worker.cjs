@@ -98,7 +98,7 @@ function fetchEvent(request) {
   let activation = null;
   listeners.activate({waitUntil(value) { activation = Promise.resolve(value); }});
   await activation;
-  assert.deepStrictEqual(deletedCaches, ["jingtu-v3"], "activation must remove the stale cache");
+  assert.deepStrictEqual(deletedCaches, ["jingtu-v3", "jingtu-v4"], "activation must remove every stale app cache");
 
   console.log("Service worker cache policy tests passed");
 })().catch(error => {
