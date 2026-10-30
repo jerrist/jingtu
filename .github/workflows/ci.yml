@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check dist/app.js
+          node --check dist/service-worker.js
+          node --check preview-server.cjs
+
+      - name: Validate question bank
+        run: npm run bank:validate
+
+      - name: Test sync API
+        run: python3 server/test_jingtu_api.py
+
+      - name: Validate deployment scripts
+        run: |
+          bash -n deploy/deploy-release.sh
+          bash -n deploy/rollback-release.sh
+          bash -n deploy/server-auto-deploy.sh

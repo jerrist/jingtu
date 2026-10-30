@@ -1,0 +1,24 @@
+[Unit]
+Description=Jingtu learning progress sync API
+After=network.target
+
+[Service]
+Type=simple
+User=jingtu
+Group=jingtu
+Environment=PYTHONUNBUFFERED=1
+Environment=JINGTU_DB_PATH=/var/lib/jingtu/jingtu.db
+Environment=JINGTU_ORIGIN=https://exam.jerrists.cloud
+Environment=JINGTU_HOST=127.0.0.1
+Environment=JINGTU_PORT=3100
+ExecStart=/usr/bin/python3 /opt/jingtu/server/jingtu_api.py
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/jingtu
+
+[Install]
+WantedBy=multi-user.target

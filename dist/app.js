@@ -3,19 +3,27 @@ const $$ = (s, root = document) => [...root.querySelectorAll(s)];
 let QUESTIONS = [];
 let BANK_META = {};
 const REASONS = ["知识点不会", "概念混淆", "审题失误", "计算/推理错误"];
-const DEFAULT_STATE = { dailyGoal: 20, examDate: "2026-11-08", records: {}, daily: {}, streak: 0, lastStudy: null, mastered: [], exams: [] };
+const DEFAULT_STATE = { schemaVersion: 1, updatedAt: 0, dailyGoal: 20, examDate: "2026-11-08", records: {}, daily: {}, streak: 0, lastStudy: null, mastered: [], exams: [] };
 let state = loadState();
 let currentView = "home";
 let practiceSubject = "all";
 let activeQuiz = null;
 let activeExam = null;
 let examTimer = null;
+let syncTimer = null;
+let syncInFlight = false;
+let suppressSync = false;
+let authState = { user: null, revision: 0 };
 
 function loadState() {
   try { return {...DEFAULT_STATE, ...JSON.parse(localStorage.getItem("jingtu-state") || "{}")}; }
   catch { return {...DEFAULT_STATE}; }
 }
-function saveState() { localStorage.setItem("jingtu-state", JSON.stringify(state)); }
+function saveState({touch = true} = {}) {
+  if (touch) state.updatedAt = Date.now();
+  localStorage.setItem("jingtu-state", JSON.stringify(state));
+  if (!suppressSync) scheduleSync();
+}
 function localDate(d = new Date()) { return d.toLocaleDateString("sv-SE"); }
 function todayDone() { return state.daily[localDate()] || 0; }
 function accuracy(filter = () => true) {
@@ -28,6 +36,157 @@ function dueQuestions() { const now = localDate(); return wrongQuestions().filte
 function daysFromNow(n) { const d = new Date(); d.setDate(d.getDate() + n); return localDate(d); }
 function toast(msg) { const el = $("#toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2200); }
 function shuffle(list) { return [...list].sort(() => Math.random() - .5); }
+
+function mergeStates(localState, remoteState) {
+  if (!remoteState || typeof remoteState !== "object") return {...DEFAULT_STATE, ...localState};
+  const local = {...DEFAULT_STATE, ...localState};
+  const remote = {...DEFAULT_STATE, ...remoteState};
+  const newer = (local.updatedAt || 0) >= (remote.updatedAt || 0) ? local : remote;
+  const merged = {...DEFAULT_STATE, ...newer};
+  merged.records = {};
+  const ids = new Set([...Object.keys(remote.records || {}), ...Object.keys(local.records || {})]);
+  ids.forEach(id => {
+    const a = remote.records?.[id], b = local.records?.[id];
+    if (!a) merged.records[id] = b;
+    else if (!b) merged.records[id] = a;
+    else {
+      const recent = String(b.last || "") >= String(a.last || "") ? b : a;
+      merged.records[id] = {
+        ...a, ...b, ...recent,
+        attempts: Math.max(a.attempts || 0, b.attempts || 0),
+        correct: Math.max(a.correct || 0, b.correct || 0),
+        wrong: Math.max(a.wrong || 0, b.wrong || 0),
+        due: [a.due, b.due].filter(Boolean).sort().at(-1)
+      };
+    }
+  });
+  merged.daily = {...remote.daily};
+  Object.entries(local.daily || {}).forEach(([day, count]) => { merged.daily[day] = Math.max(merged.daily[day] || 0, count || 0); });
+  merged.mastered = [...new Set([...(remote.mastered || []), ...(local.mastered || [])])];
+  const exams = [...(remote.exams || []), ...(local.exams || [])];
+  merged.exams = [...new Map(exams.map(exam => [JSON.stringify(exam), exam])).values()];
+  merged.streak = Math.max(remote.streak || 0, local.streak || 0);
+  merged.updatedAt = Math.max(remote.updatedAt || 0, local.updatedAt || 0);
+  return merged;
+}
+
+async function api(path, options = {}) {
+  const response = await fetch(path, {credentials: "same-origin", headers: {"Content-Type": "application/json", ...(options.headers || {})}, ...options});
+  const payload = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    const error = new Error(payload.error || `请求失败 (${response.status})`);
+    error.status = response.status;
+    error.payload = payload;
+    throw error;
+  }
+  return payload;
+}
+
+function setSyncStatus(label, type = "") {
+  const element = $("#sync-status");
+  if (!element) return;
+  element.textContent = label;
+  element.className = `sync-pill ${type}`.trim();
+  const accountLabel = $("#account-sync-label");
+  if (accountLabel && authState.user) accountLabel.textContent = label;
+}
+
+function scheduleSync() {
+  if (!authState.user) return;
+  clearTimeout(syncTimer);
+  setSyncStatus("等待同步", "syncing");
+  syncTimer = setTimeout(() => syncProgress(), 900);
+}
+
+async function syncProgress() {
+  if (!authState.user || syncInFlight) return;
+  syncInFlight = true;
+  setSyncStatus("正在同步", "syncing");
+  try {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const result = await api("/api/progress", {method: "PUT", body: JSON.stringify({baseRevision: authState.revision, state})});
+        authState.revision = result.revision;
+        setSyncStatus("已同步");
+        return;
+      } catch (error) {
+        if (error.status !== 409 || attempt > 0) throw error;
+        authState.revision = error.payload.revision || 0;
+        suppressSync = true;
+        state = mergeStates(state, error.payload.state);
+        saveState({touch: false});
+        suppressSync = false;
+      }
+    }
+  } catch (error) {
+    console.error("Cloud sync failed", error);
+    setSyncStatus("同步失败", "error");
+  } finally {
+    syncInFlight = false;
+  }
+}
+
+function renderAccountUI() {
+  const signedIn = Boolean(authState.user);
+  $("#account-anonymous")?.classList.toggle("hidden", signedIn);
+  $("#account-signed-in")?.classList.toggle("hidden", !signedIn);
+  const button = $("#account-button");
+  if (button) button.textContent = signedIn ? authState.user.username.slice(0, 2) : "登录";
+  if (signedIn) {
+    $("#account-username-label").textContent = authState.user.username;
+    $("#account-user-avatar").textContent = authState.user.username.slice(0, 1);
+  } else setSyncStatus("本地模式");
+}
+
+async function activateAccount(user) {
+  authState.user = user;
+  renderAccountUI();
+  setSyncStatus("正在合并", "syncing");
+  const cloud = await api("/api/progress");
+  authState.revision = cloud.revision || 0;
+  if (cloud.state) {
+    suppressSync = true;
+    state = mergeStates(state, cloud.state);
+    saveState({touch: false});
+    suppressSync = false;
+    renderHome();
+  }
+  await syncProgress();
+}
+
+async function authenticate(mode) {
+  const username = $("#account-username").value.trim();
+  const password = $("#account-password").value;
+  const message = $("#auth-message");
+  message.textContent = "正在连接…";
+  try {
+    const result = await api(`/api/auth/${mode}`, {method: "POST", body: JSON.stringify({username, password})});
+    await activateAccount(result.user);
+    $("#account-password").value = "";
+    message.textContent = "";
+    toast(mode === "register" ? "账号已创建，数据已同步" : "登录成功，数据已同步");
+  } catch (error) { message.textContent = error.message; }
+}
+
+async function restoreSession() {
+  try {
+    const result = await api("/api/me");
+    if (result.user) await activateAccount(result.user);
+    else renderAccountUI();
+  } catch {
+    console.info("Cloud sync unavailable; continuing locally.");
+    renderAccountUI();
+  }
+}
+
+async function logoutAccount() {
+  await syncProgress();
+  try { await api("/api/auth/logout", {method: "POST", body: "{}"}); } catch {}
+  authState = {user: null, revision: 0};
+  renderAccountUI();
+  $("#account-dialog").close();
+  toast("已退出账号，本机记录仍然保留");
+}
 function optionText(option) { return typeof option === "string" ? option : option.text; }
 function optionId(option, index) { return typeof option === "string" ? String.fromCharCode(65 + index) : option.id; }
 function answerIds(question) { return question.answers || [String.fromCharCode(65 + question.answer)]; }
@@ -221,6 +380,14 @@ async function init(){
   const dialog=$("#settings-dialog");const openSettings=()=>{$("#goal-input").value=state.dailyGoal;$("#exam-date-input").value=state.examDate;dialog.showModal();};
   $("#open-settings").onclick=openSettings;$("#header-settings").onclick=openSettings;
   $("#save-settings").onclick=e=>{e.preventDefault();state.dailyGoal=Math.max(5,Math.min(100,Number($("#goal-input").value)||20));state.examDate=$("#exam-date-input").value||state.examDate;saveState();dialog.close();renderHome();toast("学习计划已更新");};
+  const accountDialog=$("#account-dialog");
+  $("#account-button").onclick=()=>{renderAccountUI();accountDialog.showModal();};
+  $("#close-account").onclick=()=>accountDialog.close();
+  $("#login-account").onclick=()=>authenticate("login");
+  $("#register-account").onclick=()=>authenticate("register");
+  $("#sync-now").onclick=()=>syncProgress();
+  $("#logout-account").onclick=()=>logoutAccount();
+  await restoreSession();
   if("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(()=>{});
 }
 init().catch(error=>{

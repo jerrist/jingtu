@@ -41,7 +41,9 @@
         </div>
         <div class="top-actions">
           <span class="streak-pill" title="连续学习天数">🔥 <b id="streak">0</b> 天</span>
-          <button class="avatar" id="header-settings" aria-label="打开设置">HR</button>
+          <span class="sync-pill" id="sync-status" title="云端同步状态">本地模式</span>
+          <button class="icon-button" id="header-settings" aria-label="打开设置">⚙</button>
+          <button class="avatar account-avatar" id="account-button" aria-label="登录或查看账号">登录</button>
         </div>
       </header>
 
@@ -136,7 +138,7 @@
           <article class="panel"><div class="panel-title"><h3>章节掌握度</h3><span class="legend"><i></i>答题正确率</span></div><div id="chapter-bars" class="chapter-bars"></div></article>
           <article class="panel"><div class="panel-title"><h3>错误原因分布</h3></div><div id="reason-chart" class="reason-chart"></div></article>
         </div>
-        <div class="panel data-note"><span>i</span><p><b>关于第一版数据</b><br />所有学习记录都保存在当前浏览器中，不会上传。清理浏览器数据会同时清除进度，可定期导出备份。</p></div>
+        <div class="panel data-note"><span>i</span><p><b>关于学习数据</b><br />未登录时记录保存在当前浏览器；登录后会自动同步到云端，可在不同设备继续学习。仍建议定期导出备份。</p></div>
       </section>
     </main>
   </div>
@@ -154,9 +156,28 @@
       <div class="dialog-head"><div><p class="eyebrow">学习计划</p><h2>把目标定得刚刚好</h2></div><button value="cancel" class="close-button" aria-label="关闭">×</button></div>
       <label>每日目标题数<input type="number" id="goal-input" min="5" max="100" step="5" /></label>
       <label>计划考试日期<input type="date" id="exam-date-input" /></label>
-      <p class="form-hint">第一版数据只保存在当前浏览器。</p>
+      <p class="form-hint">登录账号后，学习计划也会随进度同步到云端。</p>
       <button value="default" class="primary-button full" id="save-settings">保存计划</button>
     </form>
+  </dialog>
+
+  <dialog id="account-dialog">
+    <div class="account-dialog-body">
+      <div class="dialog-head"><div><p class="eyebrow">云端账号</p><h2>换台设备，接着学习</h2></div><button class="close-button" id="close-account" aria-label="关闭">×</button></div>
+      <div id="account-anonymous">
+        <p class="account-intro">注册或登录后，当前浏览器里的做题记录会安全合并到云端。</p>
+        <label>账号<input type="text" id="account-username" autocomplete="username" maxlength="24" placeholder="3–24 位中文、字母或数字" /></label>
+        <label>密码<input type="password" id="account-password" autocomplete="current-password" maxlength="128" placeholder="至少 8 位" /></label>
+        <p class="auth-message" id="auth-message" role="status"></p>
+        <div class="auth-actions"><button class="secondary-button" id="register-account">注册账号</button><button class="primary-button" id="login-account">登录并同步</button></div>
+      </div>
+      <div id="account-signed-in" class="hidden">
+        <div class="account-user"><span class="account-user-avatar" id="account-user-avatar">经</span><div><small>当前账号</small><strong id="account-username-label"></strong></div></div>
+        <div class="cloud-summary"><span>✓</span><p><b id="account-sync-label">学习数据已同步</b><br />刷新页面或更换设备登录，进度都会自动恢复。</p></div>
+        <button class="secondary-button full" id="sync-now">立即同步</button>
+        <button class="text-button danger-text" id="logout-account">退出登录</button>
+      </div>
+    </div>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>

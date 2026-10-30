@@ -1,1381 +1,12 @@
 {
   "schemaVersion": "2.0.0",
-  "bankVersion": "2026-demo.2",
+  "bankVersion": "local-20261029.32",
   "syllabusVersion": "2026-demo",
   "locale": "zh-CN",
   "title": "经途中级经济师示例题库",
   "description": "产品功能验证用原创示例题库，尚未按正式考试大纲完成审核。",
   "updatedAt": "2026-10-29",
   "questions": [
-    {
-      "id": "e01",
-      "subject": "经济基础知识",
-      "chapter": "市场需求、供给与均衡价格",
-      "knowledgePoints": [
-        "需求规律",
-        "需求量变动"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "在其他条件不变的情况下，商品价格下降通常会导致该商品的需求量发生什么变化？",
-      "options": [
-        {
-          "id": "A",
-          "text": "增加"
-        },
-        {
-          "id": "B",
-          "text": "减少"
-        },
-        {
-          "id": "C",
-          "text": "不变"
-        },
-        {
-          "id": "D",
-          "text": "先增后减"
-        }
-      ],
-      "answers": [
-        "A"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "需求规律表明，在其他条件不变时，价格与需求量通常呈反方向变化。注意区分“需求量变化”和由非价格因素引起的“需求变化”。",
-        "keyPoint": "需求规律",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": "需求规律表明，在其他条件不变时，价格与需求量通常呈反方向变化。注意区分“需求量变化”和由非价格因素引起的“需求变化”。",
-          "B": null,
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 1,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "需求规律",
-        "需求量变动",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e02",
-      "subject": "经济基础知识",
-      "chapter": "市场需求、供给与均衡价格",
-      "knowledgePoints": [
-        "需求价格弹性"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "如果某商品的需求价格弹性系数绝对值大于 1，该商品属于哪一类需求？",
-      "options": [
-        {
-          "id": "A",
-          "text": "缺乏弹性"
-        },
-        {
-          "id": "B",
-          "text": "富有弹性"
-        },
-        {
-          "id": "C",
-          "text": "完全无弹性"
-        },
-        {
-          "id": "D",
-          "text": "单位弹性"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "需求价格弹性绝对值大于 1，说明需求量变动幅度大于价格变动幅度，属于富有弹性。",
-        "keyPoint": "需求价格弹性",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "需求价格弹性绝对值大于 1，说明需求量变动幅度大于价格变动幅度，属于富有弹性。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "需求价格弹性",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e03",
-      "subject": "经济基础知识",
-      "chapter": "消费者行为分析",
-      "knowledgePoints": [
-        "无差异曲线"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "在序数效用理论中，能够表示消费者偏好相同的两种商品组合的曲线是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "预算线"
-        },
-        {
-          "id": "B",
-          "text": "需求曲线"
-        },
-        {
-          "id": "C",
-          "text": "无差异曲线"
-        },
-        {
-          "id": "D",
-          "text": "恩格尔曲线"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "无差异曲线表示能够给消费者带来相同满足程度的不同商品组合。预算线表示收入和价格约束。",
-        "keyPoint": "无差异曲线",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "无差异曲线表示能够给消费者带来相同满足程度的不同商品组合。预算线表示收入和价格约束。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "无差异曲线",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e04",
-      "subject": "经济基础知识",
-      "chapter": "生产和成本理论",
-      "knowledgePoints": [
-        "边际成本"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "企业增加一个单位产量时总成本的增加额，称为？",
-      "options": [
-        {
-          "id": "A",
-          "text": "平均成本"
-        },
-        {
-          "id": "B",
-          "text": "固定成本"
-        },
-        {
-          "id": "C",
-          "text": "机会成本"
-        },
-        {
-          "id": "D",
-          "text": "边际成本"
-        }
-      ],
-      "answers": [
-        "D"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "边际成本是产量每增加一个单位时总成本的增加额，是判断最优产量的重要指标。",
-        "keyPoint": "边际成本",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": null,
-          "D": "边际成本是产量每增加一个单位时总成本的增加额，是判断最优产量的重要指标。"
-        }
-      },
-      "difficulty": 1,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "边际成本",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e05",
-      "subject": "经济基础知识",
-      "chapter": "市场结构理论",
-      "knowledgePoints": [
-        "价格歧视"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "完全垄断企业进行价格歧视的基本条件不包括？",
-      "options": [
-        {
-          "id": "A",
-          "text": "能够划分不同购买者"
-        },
-        {
-          "id": "B",
-          "text": "不同市场之间能够自由转售"
-        },
-        {
-          "id": "C",
-          "text": "能够阻止套利"
-        },
-        {
-          "id": "D",
-          "text": "不同购买者需求弹性不同"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "价格歧视需要市场可分割且能够阻止转售套利。如果可以自由转售，差别定价难以维持。",
-        "keyPoint": "价格歧视",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "价格歧视需要市场可分割且能够阻止转售套利。如果可以自由转售，差别定价难以维持。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 3,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "价格歧视",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e06",
-      "subject": "经济基础知识",
-      "chapter": "国民收入核算和宏观经济模型",
-      "knowledgePoints": [
-        "支出法国内生产总值"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "用支出法核算国内生产总值时，不计入 GDP 的项目是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "居民消费支出"
-        },
-        {
-          "id": "B",
-          "text": "政府购买支出"
-        },
-        {
-          "id": "C",
-          "text": "企业投资支出"
-        },
-        {
-          "id": "D",
-          "text": "购买二手住宅支出"
-        }
-      ],
-      "answers": [
-        "D"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "二手住宅在首次建成交易时已计入 GDP，再次交易不代表当期新增最终产品；相关中介服务可计入。",
-        "keyPoint": "支出法国内生产总值",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": null,
-          "D": "二手住宅在首次建成交易时已计入 GDP，再次交易不代表当期新增最终产品；相关中介服务可计入。"
-        }
-      },
-      "difficulty": 3,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "支出法国内生产总值",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e07",
-      "subject": "经济基础知识",
-      "chapter": "经济增长和经济发展理论",
-      "knowledgePoints": [
-        "经济周期"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "经济周期中，经济活动扩张到最高点后转入收缩的转折点称为？",
-      "options": [
-        {
-          "id": "A",
-          "text": "谷底"
-        },
-        {
-          "id": "B",
-          "text": "峰顶"
-        },
-        {
-          "id": "C",
-          "text": "复苏"
-        },
-        {
-          "id": "D",
-          "text": "萧条"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "峰顶是扩张阶段转向收缩阶段的转折点；谷底则是收缩转向扩张的转折点。",
-        "keyPoint": "经济周期",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "峰顶是扩张阶段转向收缩阶段的转折点；谷底则是收缩转向扩张的转折点。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "经济周期",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e08",
-      "subject": "经济基础知识",
-      "chapter": "价格总水平和就业、失业",
-      "knowledgePoints": [
-        "周期性失业"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "由于经济周期波动造成劳动力供求失衡而产生的失业称为？",
-      "options": [
-        {
-          "id": "A",
-          "text": "摩擦性失业"
-        },
-        {
-          "id": "B",
-          "text": "结构性失业"
-        },
-        {
-          "id": "C",
-          "text": "周期性失业"
-        },
-        {
-          "id": "D",
-          "text": "自愿失业"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "周期性失业与经济周期的衰退或萧条相联系，源于总需求不足。",
-        "keyPoint": "周期性失业",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "周期性失业与经济周期的衰退或萧条相联系，源于总需求不足。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "周期性失业",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e09",
-      "subject": "经济基础知识",
-      "chapter": "公共财政与财政职能",
-      "knowledgePoints": [
-        "财政收入分配职能"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "市场经济条件下，财政履行收入分配职能的目标是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "实现绝对平均"
-        },
-        {
-          "id": "B",
-          "text": "提高资源配置效率"
-        },
-        {
-          "id": "C",
-          "text": "实现公平分配"
-        },
-        {
-          "id": "D",
-          "text": "稳定价格总水平"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "收入分配职能旨在调节收入和财富分配，促进社会公平。资源配置和经济稳定是财政的其他职能。",
-        "keyPoint": "财政收入分配职能",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "收入分配职能旨在调节收入和财富分配，促进社会公平。资源配置和经济稳定是财政的其他职能。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "财政收入分配职能",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e10",
-      "subject": "经济基础知识",
-      "chapter": "财政政策",
-      "knowledgePoints": [
-        "紧缩性财政政策"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "经济过热、通货膨胀压力较大时，通常适宜采取哪种财政政策？",
-      "options": [
-        {
-          "id": "A",
-          "text": "扩张性财政政策"
-        },
-        {
-          "id": "B",
-          "text": "紧缩性财政政策"
-        },
-        {
-          "id": "C",
-          "text": "中性货币政策"
-        },
-        {
-          "id": "D",
-          "text": "扩张性货币政策"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "紧缩性财政政策通过减少支出或增加税收抑制社会总需求，适合经济过热时期。",
-        "keyPoint": "紧缩性财政政策",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "紧缩性财政政策通过减少支出或增加税收抑制社会总需求，适合经济过热时期。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "紧缩性财政政策",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e11",
-      "subject": "经济基础知识",
-      "chapter": "货币供求与货币均衡",
-      "knowledgePoints": [
-        "货币层次"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "在货币层次划分中，作为划分依据的主要是金融资产的？",
-      "options": [
-        {
-          "id": "A",
-          "text": "安全性"
-        },
-        {
-          "id": "B",
-          "text": "收益性"
-        },
-        {
-          "id": "C",
-          "text": "流动性"
-        },
-        {
-          "id": "D",
-          "text": "期限性"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "货币层次按照资产流动性，即转化为现实购买力的便利程度进行划分。",
-        "keyPoint": "货币层次",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "货币层次按照资产流动性，即转化为现实购买力的便利程度进行划分。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "货币层次",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e12",
-      "subject": "经济基础知识",
-      "chapter": "中央银行与货币政策",
-      "knowledgePoints": [
-        "法定存款准备金率"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "中央银行提高法定存款准备金率，通常会产生什么影响？",
-      "options": [
-        {
-          "id": "A",
-          "text": "扩大货币乘数"
-        },
-        {
-          "id": "B",
-          "text": "增加商业银行可贷资金"
-        },
-        {
-          "id": "C",
-          "text": "收缩货币供应量"
-        },
-        {
-          "id": "D",
-          "text": "降低市场利率"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "提高准备金率会减少商业银行可用于贷款的资金，降低货币乘数，从而收缩货币供应量。",
-        "keyPoint": "法定存款准备金率",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "提高准备金率会减少商业银行可用于贷款的资金，降低货币乘数，从而收缩货币供应量。",
-          "D": null
-        }
-      },
-      "difficulty": 3,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "法定存款准备金率",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e13",
-      "subject": "经济基础知识",
-      "chapter": "统计与数据科学",
-      "knowledgePoints": [
-        "离散程度",
-        "标准差"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "下列指标中，适合用于反映一组数据离散程度的是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "众数"
-        },
-        {
-          "id": "B",
-          "text": "中位数"
-        },
-        {
-          "id": "C",
-          "text": "标准差"
-        },
-        {
-          "id": "D",
-          "text": "算术平均数"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "标准差反映各变量值与均值的平均偏离程度，是常用的离散程度指标。",
-        "keyPoint": "离散程度",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "标准差反映各变量值与均值的平均偏离程度，是常用的离散程度指标。",
-          "D": null
-        }
-      },
-      "difficulty": 1,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "离散程度",
-        "标准差",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e14",
-      "subject": "经济基础知识",
-      "chapter": "会计概论",
-      "knowledgePoints": [
-        "历史成本"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "企业资产按照购置时支付的现金或现金等价物金额计量，体现的会计计量属性是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "重置成本"
-        },
-        {
-          "id": "B",
-          "text": "可变现净值"
-        },
-        {
-          "id": "C",
-          "text": "历史成本"
-        },
-        {
-          "id": "D",
-          "text": "现值"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "历史成本又称实际成本，是取得资产时实际发生的成本。",
-        "keyPoint": "历史成本",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "历史成本又称实际成本，是取得资产时实际发生的成本。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "历史成本",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e15",
-      "subject": "经济基础知识",
-      "chapter": "财务报表分析",
-      "knowledgePoints": [
-        "流动比率"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "流动比率的计算公式是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "流动资产÷流动负债"
-        },
-        {
-          "id": "B",
-          "text": "速动资产÷流动负债"
-        },
-        {
-          "id": "C",
-          "text": "流动负债÷流动资产"
-        },
-        {
-          "id": "D",
-          "text": "营业利润÷营业收入"
-        }
-      ],
-      "answers": [
-        "A"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "流动比率=流动资产÷流动负债，用于衡量企业短期偿债能力。",
-        "keyPoint": "流动比率",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": "流动比率=流动资产÷流动负债，用于衡量企业短期偿债能力。",
-          "B": null,
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "流动比率",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "e16",
-      "subject": "经济基础知识",
-      "chapter": "民商法律制度",
-      "knowledgePoints": [
-        "代理制度"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "关于代理，下列说法正确的是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "代理人必须以自己的名义实施行为"
-        },
-        {
-          "id": "B",
-          "text": "代理行为的法律后果由代理人承担"
-        },
-        {
-          "id": "C",
-          "text": "代理人在代理权限内以被代理人名义实施行为"
-        },
-        {
-          "id": "D",
-          "text": "所有民事行为都可以代理"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "代理人在权限范围内以被代理人名义实施民事法律行为，其后果由被代理人承担；具有人身性质的行为通常不能代理。",
-        "keyPoint": "代理制度",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "代理人在权限范围内以被代理人名义实施民事法律行为，其后果由被代理人承担；具有人身性质的行为通常不能代理。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "代理制度",
-        "经济基础知识"
-      ]
-    },
-    {
-      "id": "h01",
-      "subject": "人力资源管理",
-      "chapter": "组织激励",
-      "knowledgePoints": [
-        "双因素理论"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "根据赫茨伯格的双因素理论，能够使员工产生满意感的因素是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "工资和监督方式"
-        },
-        {
-          "id": "B",
-          "text": "工作条件"
-        },
-        {
-          "id": "C",
-          "text": "成就感和责任感"
-        },
-        {
-          "id": "D",
-          "text": "人际关系"
-        }
-      ],
-      "answers": [
-        "C"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "成就感、认可、工作本身、责任和晋升属于激励因素；工资、监督、工作条件等属于保健因素。",
-        "keyPoint": "双因素理论",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": null,
-          "C": "成就感、认可、工作本身、责任和晋升属于激励因素；工资、监督、工作条件等属于保健因素。",
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "双因素理论",
-        "人力资源管理"
-      ]
-    },
-    {
-      "id": "h02",
-      "subject": "人力资源管理",
-      "chapter": "组织激励",
-      "knowledgePoints": [
-        "期望理论"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "期望理论认为，个体动机取决于效价、期望和哪一项的乘积？",
-      "options": [
-        {
-          "id": "A",
-          "text": "公平"
-        },
-        {
-          "id": "B",
-          "text": "工具性"
-        },
-        {
-          "id": "C",
-          "text": "强化"
-        },
-        {
-          "id": "D",
-          "text": "目标难度"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "期望理论的核心关系是：动机=效价×期望×工具性。任何一项接近零，整体动机都会很弱。",
-        "keyPoint": "期望理论",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "期望理论的核心关系是：动机=效价×期望×工具性。任何一项接近零，整体动机都会很弱。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 3,
-      "frequency": "high",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "期望理论",
-        "人力资源管理"
-      ]
-    },
-    {
-      "id": "h03",
-      "subject": "人力资源管理",
-      "chapter": "领导行为",
-      "knowledgePoints": [
-        "路径—目标理论"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "路径—目标理论认为，领导者的主要任务是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "替员工设定不可改变的目标"
-        },
-        {
-          "id": "B",
-          "text": "帮助下属明确实现目标的路径并清除障碍"
-        },
-        {
-          "id": "C",
-          "text": "仅通过物质奖励影响下属"
-        },
-        {
-          "id": "D",
-          "text": "保持固定领导风格"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "路径—目标理论强调领导者帮助下属明确目标与路径、清除障碍，并根据情境调整领导方式。",
-        "keyPoint": "路径—目标理论",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "路径—目标理论强调领导者帮助下属明确目标与路径、清除障碍，并根据情境调整领导方式。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "路径—目标理论",
-        "人力资源管理"
-      ]
-    },
-    {
-      "id": "h04",
-      "subject": "人力资源管理",
-      "chapter": "组织设计与组织文化",
-      "knowledgePoints": [
-        "管理幅度与管理层次"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "组织结构中的管理层次与管理幅度之间通常呈什么关系？",
-      "options": [
-        {
-          "id": "A",
-          "text": "正比关系"
-        },
-        {
-          "id": "B",
-          "text": "反比关系"
-        },
-        {
-          "id": "C",
-          "text": "无关"
-        },
-        {
-          "id": "D",
-          "text": "先正比后反比"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "在组织规模一定时，管理幅度越大，所需层次通常越少；管理幅度越小，层次通常越多。",
-        "keyPoint": "管理幅度与管理层次",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "在组织规模一定时，管理幅度越大，所需层次通常越少；管理幅度越小，层次通常越多。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 2,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "管理幅度与管理层次",
-        "人力资源管理"
-      ]
-    },
-    {
-      "id": "h05",
-      "subject": "人力资源管理",
-      "chapter": "战略性人力资源管理",
-      "knowledgePoints": [
-        "战略匹配"
-      ],
-      "type": "single",
-      "material": null,
-      "stem": "战略性人力资源管理的核心理念是？",
-      "options": [
-        {
-          "id": "A",
-          "text": "将人力资源视为成本中心"
-        },
-        {
-          "id": "B",
-          "text": "人力资源管理与组织战略相匹配"
-        },
-        {
-          "id": "C",
-          "text": "只关注员工关系"
-        },
-        {
-          "id": "D",
-          "text": "以行政事务为主要目标"
-        }
-      ],
-      "answers": [
-        "B"
-      ],
-      "scoring": {
-        "score": 1,
-        "partialCredit": false
-      },
-      "explanation": {
-        "summary": "战略性人力资源管理强调人力资源政策与组织战略之间的纵向匹配，以及各项人力资源实践之间的横向匹配。",
-        "keyPoint": "战略匹配",
-        "memoryTip": null,
-        "optionAnalysis": {
-          "A": null,
-          "B": "战略性人力资源管理强调人力资源政策与组织战略之间的纵向匹配，以及各项人力资源实践之间的横向匹配。",
-          "C": null,
-          "D": null
-        }
-      },
-      "difficulty": 3,
-      "frequency": "medium",
-      "source": {
-        "kind": "original_demo",
-        "title": "经途示例题库",
-        "year": null,
-        "reference": null
-      },
-      "syllabusVersion": "2026-demo",
-      "review": {
-        "status": "draft",
-        "reviewer": null,
-        "verifiedAt": null
-      },
-      "tags": [
-        "战略匹配",
-        "人力资源管理"
-      ]
-    },
     {
       "id": "h06",
       "subject": "人力资源管理",
@@ -1568,6 +199,526 @@
       },
       "tags": [
         "结构化面试",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h15",
+      "subject": "人力资源管理",
+      "chapter": "劳动关系",
+      "knowledgePoints": [
+        "劳动关系建立"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "用人单位自用工之日起即与劳动者建立？",
+      "options": [
+        {
+          "id": "A",
+          "text": "劳务关系"
+        },
+        {
+          "id": "B",
+          "text": "劳动关系"
+        },
+        {
+          "id": "C",
+          "text": "代理关系"
+        },
+        {
+          "id": "D",
+          "text": "承揽关系"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "劳动关系自实际用工之日起建立。书面劳动合同应依法及时订立，但不是劳动关系成立的唯一标志。",
+        "keyPoint": "劳动关系建立",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "劳动关系自实际用工之日起建立。书面劳动合同应依法及时订立，但不是劳动关系成立的唯一标志。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 1,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "劳动关系建立",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h14",
+      "subject": "人力资源管理",
+      "chapter": "劳动力市场理论",
+      "knowledgePoints": [
+        "劳动力需求曲线"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "在其他条件不变时，工资率上升导致企业减少劳动力需求，体现劳动力需求曲线通常？",
+      "options": [
+        {
+          "id": "A",
+          "text": "向右上方倾斜"
+        },
+        {
+          "id": "B",
+          "text": "向右下方倾斜"
+        },
+        {
+          "id": "C",
+          "text": "垂直于横轴"
+        },
+        {
+          "id": "D",
+          "text": "平行于横轴"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "工资率与劳动力需求量一般呈反方向变化，因此劳动力需求曲线通常向右下方倾斜。",
+        "keyPoint": "劳动力需求曲线",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "工资率与劳动力需求量一般呈反方向变化，因此劳动力需求曲线通常向右下方倾斜。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "劳动力需求曲线",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h13",
+      "subject": "人力资源管理",
+      "chapter": "培训与开发",
+      "knowledgePoints": [
+        "培训效果评估"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "柯克帕特里克培训评估模型中，考察受训者在工作中行为是否改变的是哪一层次？",
+      "options": [
+        {
+          "id": "A",
+          "text": "反应评估"
+        },
+        {
+          "id": "B",
+          "text": "学习评估"
+        },
+        {
+          "id": "C",
+          "text": "行为评估"
+        },
+        {
+          "id": "D",
+          "text": "结果评估"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "四层评估依次为反应、学习、行为和结果。行为层关注培训内容是否迁移到实际工作中。",
+        "keyPoint": "培训效果评估",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "四层评估依次为反应、学习、行为和结果。行为层关注培训内容是否迁移到实际工作中。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "培训效果评估",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h05",
+      "subject": "人力资源管理",
+      "chapter": "战略性人力资源管理",
+      "knowledgePoints": [
+        "战略匹配"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "战略性人力资源管理的核心理念是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "将人力资源视为成本中心"
+        },
+        {
+          "id": "B",
+          "text": "人力资源管理与组织战略相匹配"
+        },
+        {
+          "id": "C",
+          "text": "只关注员工关系"
+        },
+        {
+          "id": "D",
+          "text": "以行政事务为主要目标"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "战略性人力资源管理强调人力资源政策与组织战略之间的纵向匹配，以及各项人力资源实践之间的横向匹配。",
+        "keyPoint": "战略匹配",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "战略性人力资源管理强调人力资源政策与组织战略之间的纵向匹配，以及各项人力资源实践之间的横向匹配。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "战略匹配",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h16",
+      "subject": "人力资源管理",
+      "chapter": "社会保险",
+      "knowledgePoints": [
+        "社会保险基本方针"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "社会保险制度坚持的基本方针不包括？",
+      "options": [
+        {
+          "id": "A",
+          "text": "广覆盖"
+        },
+        {
+          "id": "B",
+          "text": "保基本"
+        },
+        {
+          "id": "C",
+          "text": "多层次"
+        },
+        {
+          "id": "D",
+          "text": "完全市场化"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "社会保险制度坚持广覆盖、保基本、多层次、可持续的方针，并非完全市场化。",
+        "keyPoint": "社会保险基本方针",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": "社会保险制度坚持广覆盖、保基本、多层次、可持续的方针，并非完全市场化。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "社会保险基本方针",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h01",
+      "subject": "人力资源管理",
+      "chapter": "组织激励",
+      "knowledgePoints": [
+        "双因素理论"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "根据赫茨伯格的双因素理论，能够使员工产生满意感的因素是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "工资和监督方式"
+        },
+        {
+          "id": "B",
+          "text": "工作条件"
+        },
+        {
+          "id": "C",
+          "text": "成就感和责任感"
+        },
+        {
+          "id": "D",
+          "text": "人际关系"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "成就感、认可、工作本身、责任和晋升属于激励因素；工资、监督、工作条件等属于保健因素。",
+        "keyPoint": "双因素理论",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "成就感、认可、工作本身、责任和晋升属于激励因素；工资、监督、工作条件等属于保健因素。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "双因素理论",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h02",
+      "subject": "人力资源管理",
+      "chapter": "组织激励",
+      "knowledgePoints": [
+        "期望理论"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "期望理论认为，个体动机取决于效价、期望和哪一项的乘积？",
+      "options": [
+        {
+          "id": "A",
+          "text": "公平"
+        },
+        {
+          "id": "B",
+          "text": "工具性"
+        },
+        {
+          "id": "C",
+          "text": "强化"
+        },
+        {
+          "id": "D",
+          "text": "目标难度"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "期望理论的核心关系是：动机=效价×期望×工具性。任何一项接近零，整体动机都会很弱。",
+        "keyPoint": "期望理论",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "期望理论的核心关系是：动机=效价×期望×工具性。任何一项接近零，整体动机都会很弱。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "期望理论",
+        "人力资源管理"
+      ]
+    },
+    {
+      "id": "h04",
+      "subject": "人力资源管理",
+      "chapter": "组织设计与组织文化",
+      "knowledgePoints": [
+        "管理幅度与管理层次"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "组织结构中的管理层次与管理幅度之间通常呈什么关系？",
+      "options": [
+        {
+          "id": "A",
+          "text": "正比关系"
+        },
+        {
+          "id": "B",
+          "text": "反比关系"
+        },
+        {
+          "id": "C",
+          "text": "无关"
+        },
+        {
+          "id": "D",
+          "text": "先正比后反比"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "在组织规模一定时，管理幅度越大，所需层次通常越少；管理幅度越小，层次通常越多。",
+        "keyPoint": "管理幅度与管理层次",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "在组织规模一定时，管理幅度越大，所需层次通常越少；管理幅度越小，层次通常越多。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "管理幅度与管理层次",
         "人力资源管理"
       ]
     },
@@ -1832,48 +983,48 @@
       ]
     },
     {
-      "id": "h13",
+      "id": "h03",
       "subject": "人力资源管理",
-      "chapter": "培训与开发",
+      "chapter": "领导行为",
       "knowledgePoints": [
-        "培训效果评估"
+        "路径—目标理论"
       ],
       "type": "single",
       "material": null,
-      "stem": "柯克帕特里克培训评估模型中，考察受训者在工作中行为是否改变的是哪一层次？",
+      "stem": "路径—目标理论认为，领导者的主要任务是？",
       "options": [
         {
           "id": "A",
-          "text": "反应评估"
+          "text": "替员工设定不可改变的目标"
         },
         {
           "id": "B",
-          "text": "学习评估"
+          "text": "帮助下属明确实现目标的路径并清除障碍"
         },
         {
           "id": "C",
-          "text": "行为评估"
+          "text": "仅通过物质奖励影响下属"
         },
         {
           "id": "D",
-          "text": "结果评估"
+          "text": "保持固定领导风格"
         }
       ],
       "answers": [
-        "C"
+        "B"
       ],
       "scoring": {
         "score": 1,
         "partialCredit": false
       },
       "explanation": {
-        "summary": "四层评估依次为反应、学习、行为和结果。行为层关注培训内容是否迁移到实际工作中。",
-        "keyPoint": "培训效果评估",
+        "summary": "路径—目标理论强调领导者帮助下属明确目标与路径、清除障碍，并根据情境调整领导方式。",
+        "keyPoint": "路径—目标理论",
         "memoryTip": null,
         "optionAnalysis": {
           "A": null,
-          "B": null,
-          "C": "四层评估依次为反应、学习、行为和结果。行为层关注培训内容是否迁移到实际工作中。",
+          "B": "路径—目标理论强调领导者帮助下属明确目标与路径、清除障碍，并根据情境调整领导方式。",
+          "C": null,
           "D": null
         }
       },
@@ -1892,36 +1043,361 @@
         "verifiedAt": null
       },
       "tags": [
-        "培训效果评估",
+        "路径—目标理论",
         "人力资源管理"
       ]
     },
     {
-      "id": "h14",
-      "subject": "人力资源管理",
-      "chapter": "劳动力市场理论",
+      "id": "e12",
+      "subject": "经济基础知识",
+      "chapter": "中央银行与货币政策",
       "knowledgePoints": [
-        "劳动力需求曲线"
+        "法定存款准备金率"
       ],
       "type": "single",
       "material": null,
-      "stem": "在其他条件不变时，工资率上升导致企业减少劳动力需求，体现劳动力需求曲线通常？",
+      "stem": "中央银行提高法定存款准备金率，通常会产生什么影响？",
       "options": [
         {
           "id": "A",
-          "text": "向右上方倾斜"
+          "text": "扩大货币乘数"
         },
         {
           "id": "B",
-          "text": "向右下方倾斜"
+          "text": "增加商业银行可贷资金"
         },
         {
           "id": "C",
-          "text": "垂直于横轴"
+          "text": "收缩货币供应量"
         },
         {
           "id": "D",
-          "text": "平行于横轴"
+          "text": "降低市场利率"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "提高准备金率会减少商业银行可用于贷款的资金，降低货币乘数，从而收缩货币供应量。",
+        "keyPoint": "法定存款准备金率",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "提高准备金率会减少商业银行可用于贷款的资金，降低货币乘数，从而收缩货币供应量。",
+          "D": null
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "法定存款准备金率",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e08",
+      "subject": "经济基础知识",
+      "chapter": "价格总水平和就业、失业",
+      "knowledgePoints": [
+        "周期性失业"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "由于经济周期波动造成劳动力供求失衡而产生的失业称为？",
+      "options": [
+        {
+          "id": "A",
+          "text": "摩擦性失业"
+        },
+        {
+          "id": "B",
+          "text": "结构性失业"
+        },
+        {
+          "id": "C",
+          "text": "周期性失业"
+        },
+        {
+          "id": "D",
+          "text": "自愿失业"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "周期性失业与经济周期的衰退或萧条相联系，源于总需求不足。",
+        "keyPoint": "周期性失业",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "周期性失业与经济周期的衰退或萧条相联系，源于总需求不足。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "周期性失业",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e14",
+      "subject": "经济基础知识",
+      "chapter": "会计概论",
+      "knowledgePoints": [
+        "历史成本"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "企业资产按照购置时支付的现金或现金等价物金额计量，体现的会计计量属性是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "重置成本"
+        },
+        {
+          "id": "B",
+          "text": "可变现净值"
+        },
+        {
+          "id": "C",
+          "text": "历史成本"
+        },
+        {
+          "id": "D",
+          "text": "现值"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "历史成本又称实际成本，是取得资产时实际发生的成本。",
+        "keyPoint": "历史成本",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "历史成本又称实际成本，是取得资产时实际发生的成本。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "历史成本",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e09",
+      "subject": "经济基础知识",
+      "chapter": "公共财政与财政职能",
+      "knowledgePoints": [
+        "财政收入分配职能"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "市场经济条件下，财政履行收入分配职能的目标是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "实现绝对平均"
+        },
+        {
+          "id": "B",
+          "text": "提高资源配置效率"
+        },
+        {
+          "id": "C",
+          "text": "实现公平分配"
+        },
+        {
+          "id": "D",
+          "text": "稳定价格总水平"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "收入分配职能旨在调节收入和财富分配，促进社会公平。资源配置和经济稳定是财政的其他职能。",
+        "keyPoint": "财政收入分配职能",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "收入分配职能旨在调节收入和财富分配，促进社会公平。资源配置和经济稳定是财政的其他职能。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "财政收入分配职能",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e06",
+      "subject": "经济基础知识",
+      "chapter": "国民收入核算和宏观经济模型",
+      "knowledgePoints": [
+        "支出法国内生产总值"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "用支出法核算国内生产总值时，不计入 GDP 的项目是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "居民消费支出"
+        },
+        {
+          "id": "B",
+          "text": "政府购买支出"
+        },
+        {
+          "id": "C",
+          "text": "企业投资支出"
+        },
+        {
+          "id": "D",
+          "text": "购买二手住宅支出"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "二手住宅在首次建成交易时已计入 GDP，再次交易不代表当期新增最终产品；相关中介服务可计入。",
+        "keyPoint": "支出法国内生产总值",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": "二手住宅在首次建成交易时已计入 GDP，再次交易不代表当期新增最终产品；相关中介服务可计入。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "支出法国内生产总值",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e05",
+      "subject": "经济基础知识",
+      "chapter": "市场结构理论",
+      "knowledgePoints": [
+        "价格歧视"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "完全垄断企业进行价格歧视的基本条件不包括？",
+      "options": [
+        {
+          "id": "A",
+          "text": "能够划分不同购买者"
+        },
+        {
+          "id": "B",
+          "text": "不同市场之间能够自由转售"
+        },
+        {
+          "id": "C",
+          "text": "能够阻止套利"
+        },
+        {
+          "id": "D",
+          "text": "不同购买者需求弹性不同"
         }
       ],
       "answers": [
@@ -1932,12 +1408,12 @@
         "partialCredit": false
       },
       "explanation": {
-        "summary": "工资率与劳动力需求量一般呈反方向变化，因此劳动力需求曲线通常向右下方倾斜。",
-        "keyPoint": "劳动力需求曲线",
+        "summary": "价格歧视需要市场可分割且能够阻止转售套利。如果可以自由转售，差别定价难以维持。",
+        "keyPoint": "价格歧视",
         "memoryTip": null,
         "optionAnalysis": {
           "A": null,
-          "B": "工资率与劳动力需求量一般呈反方向变化，因此劳动力需求曲线通常向右下方倾斜。",
+          "B": "价格歧视需要市场可分割且能够阻止转售套利。如果可以自由转售，差别定价难以维持。",
           "C": null,
           "D": null
         }
@@ -1957,52 +1433,53 @@
         "verifiedAt": null
       },
       "tags": [
-        "劳动力需求曲线",
-        "人力资源管理"
+        "价格歧视",
+        "经济基础知识"
       ]
     },
     {
-      "id": "h15",
-      "subject": "人力资源管理",
-      "chapter": "劳动关系",
+      "id": "e01",
+      "subject": "经济基础知识",
+      "chapter": "市场需求、供给与均衡价格",
       "knowledgePoints": [
-        "劳动关系建立"
+        "需求规律",
+        "需求量变动"
       ],
       "type": "single",
       "material": null,
-      "stem": "用人单位自用工之日起即与劳动者建立？",
+      "stem": "在其他条件不变的情况下，商品价格下降通常会导致该商品的需求量发生什么变化？",
       "options": [
         {
           "id": "A",
-          "text": "劳务关系"
+          "text": "增加"
         },
         {
           "id": "B",
-          "text": "劳动关系"
+          "text": "减少"
         },
         {
           "id": "C",
-          "text": "代理关系"
+          "text": "不变"
         },
         {
           "id": "D",
-          "text": "承揽关系"
+          "text": "先增后减"
         }
       ],
       "answers": [
-        "B"
+        "A"
       ],
       "scoring": {
         "score": 1,
         "partialCredit": false
       },
       "explanation": {
-        "summary": "劳动关系自实际用工之日起建立。书面劳动合同应依法及时订立，但不是劳动关系成立的唯一标志。",
-        "keyPoint": "劳动关系建立",
+        "summary": "需求规律表明，在其他条件不变时，价格与需求量通常呈反方向变化。注意区分“需求量变化”和由非价格因素引起的“需求变化”。",
+        "keyPoint": "需求规律",
         "memoryTip": null,
         "optionAnalysis": {
-          "A": null,
-          "B": "劳动关系自实际用工之日起建立。书面劳动合同应依法及时订立，但不是劳动关系成立的唯一标志。",
+          "A": "需求规律表明，在其他条件不变时，价格与需求量通常呈反方向变化。注意区分“需求量变化”和由非价格因素引起的“需求变化”。",
+          "B": null,
           "C": null,
           "D": null
         }
@@ -2022,54 +1499,120 @@
         "verifiedAt": null
       },
       "tags": [
-        "劳动关系建立",
-        "人力资源管理"
+        "需求规律",
+        "需求量变动",
+        "经济基础知识"
       ]
     },
     {
-      "id": "h16",
-      "subject": "人力资源管理",
-      "chapter": "社会保险",
+      "id": "e02",
+      "subject": "经济基础知识",
+      "chapter": "市场需求、供给与均衡价格",
       "knowledgePoints": [
-        "社会保险基本方针"
+        "需求价格弹性"
       ],
       "type": "single",
       "material": null,
-      "stem": "社会保险制度坚持的基本方针不包括？",
+      "stem": "如果某商品的需求价格弹性系数绝对值大于 1，该商品属于哪一类需求？",
       "options": [
         {
           "id": "A",
-          "text": "广覆盖"
+          "text": "缺乏弹性"
         },
         {
           "id": "B",
-          "text": "保基本"
+          "text": "富有弹性"
         },
         {
           "id": "C",
-          "text": "多层次"
+          "text": "完全无弹性"
         },
         {
           "id": "D",
-          "text": "完全市场化"
+          "text": "单位弹性"
         }
       ],
       "answers": [
-        "D"
+        "B"
       ],
       "scoring": {
         "score": 1,
         "partialCredit": false
       },
       "explanation": {
-        "summary": "社会保险制度坚持广覆盖、保基本、多层次、可持续的方针，并非完全市场化。",
-        "keyPoint": "社会保险基本方针",
+        "summary": "需求价格弹性绝对值大于 1，说明需求量变动幅度大于价格变动幅度，属于富有弹性。",
+        "keyPoint": "需求价格弹性",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "需求价格弹性绝对值大于 1，说明需求量变动幅度大于价格变动幅度，属于富有弹性。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "需求价格弹性",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e16",
+      "subject": "经济基础知识",
+      "chapter": "民商法律制度",
+      "knowledgePoints": [
+        "代理制度"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "关于代理，下列说法正确的是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "代理人必须以自己的名义实施行为"
+        },
+        {
+          "id": "B",
+          "text": "代理行为的法律后果由代理人承担"
+        },
+        {
+          "id": "C",
+          "text": "代理人在代理权限内以被代理人名义实施行为"
+        },
+        {
+          "id": "D",
+          "text": "所有民事行为都可以代理"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "代理人在权限范围内以被代理人名义实施民事法律行为，其后果由被代理人承担；具有人身性质的行为通常不能代理。",
+        "keyPoint": "代理制度",
         "memoryTip": null,
         "optionAnalysis": {
           "A": null,
           "B": null,
-          "C": null,
-          "D": "社会保险制度坚持广覆盖、保基本、多层次、可持续的方针，并非完全市场化。"
+          "C": "代理人在权限范围内以被代理人名义实施民事法律行为，其后果由被代理人承担；具有人身性质的行为通常不能代理。",
+          "D": null
         }
       },
       "difficulty": 2,
@@ -2087,8 +1630,465 @@
         "verifiedAt": null
       },
       "tags": [
-        "社会保险基本方针",
-        "人力资源管理"
+        "代理制度",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e03",
+      "subject": "经济基础知识",
+      "chapter": "消费者行为分析",
+      "knowledgePoints": [
+        "无差异曲线"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "在序数效用理论中，能够表示消费者偏好相同的两种商品组合的曲线是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "预算线"
+        },
+        {
+          "id": "B",
+          "text": "需求曲线"
+        },
+        {
+          "id": "C",
+          "text": "无差异曲线"
+        },
+        {
+          "id": "D",
+          "text": "恩格尔曲线"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "无差异曲线表示能够给消费者带来相同满足程度的不同商品组合。预算线表示收入和价格约束。",
+        "keyPoint": "无差异曲线",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "无差异曲线表示能够给消费者带来相同满足程度的不同商品组合。预算线表示收入和价格约束。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "无差异曲线",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e04",
+      "subject": "经济基础知识",
+      "chapter": "生产和成本理论",
+      "knowledgePoints": [
+        "边际成本"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "企业增加一个单位产量时总成本的增加额，称为？",
+      "options": [
+        {
+          "id": "A",
+          "text": "平均成本"
+        },
+        {
+          "id": "B",
+          "text": "固定成本"
+        },
+        {
+          "id": "C",
+          "text": "机会成本"
+        },
+        {
+          "id": "D",
+          "text": "边际成本"
+        }
+      ],
+      "answers": [
+        "D"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "边际成本是产量每增加一个单位时总成本的增加额，是判断最优产量的重要指标。",
+        "keyPoint": "边际成本",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": null,
+          "D": "边际成本是产量每增加一个单位时总成本的增加额，是判断最优产量的重要指标。"
+        }
+      },
+      "difficulty": 1,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "边际成本",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e07",
+      "subject": "经济基础知识",
+      "chapter": "经济增长和经济发展理论",
+      "knowledgePoints": [
+        "经济周期"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "经济周期中，经济活动扩张到最高点后转入收缩的转折点称为？",
+      "options": [
+        {
+          "id": "A",
+          "text": "谷底"
+        },
+        {
+          "id": "B",
+          "text": "峰顶"
+        },
+        {
+          "id": "C",
+          "text": "复苏"
+        },
+        {
+          "id": "D",
+          "text": "萧条"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "峰顶是扩张阶段转向收缩阶段的转折点；谷底则是收缩转向扩张的转折点。",
+        "keyPoint": "经济周期",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "峰顶是扩张阶段转向收缩阶段的转折点；谷底则是收缩转向扩张的转折点。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "经济周期",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e13",
+      "subject": "经济基础知识",
+      "chapter": "统计与数据科学",
+      "knowledgePoints": [
+        "离散程度",
+        "标准差"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "下列指标中，适合用于反映一组数据离散程度的是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "众数"
+        },
+        {
+          "id": "B",
+          "text": "中位数"
+        },
+        {
+          "id": "C",
+          "text": "标准差"
+        },
+        {
+          "id": "D",
+          "text": "算术平均数"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "标准差反映各变量值与均值的平均偏离程度，是常用的离散程度指标。",
+        "keyPoint": "离散程度",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "标准差反映各变量值与均值的平均偏离程度，是常用的离散程度指标。",
+          "D": null
+        }
+      },
+      "difficulty": 1,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "离散程度",
+        "标准差",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e15",
+      "subject": "经济基础知识",
+      "chapter": "财务报表分析",
+      "knowledgePoints": [
+        "流动比率"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "流动比率的计算公式是？",
+      "options": [
+        {
+          "id": "A",
+          "text": "流动资产÷流动负债"
+        },
+        {
+          "id": "B",
+          "text": "速动资产÷流动负债"
+        },
+        {
+          "id": "C",
+          "text": "流动负债÷流动资产"
+        },
+        {
+          "id": "D",
+          "text": "营业利润÷营业收入"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "流动比率=流动资产÷流动负债，用于衡量企业短期偿债能力。",
+        "keyPoint": "流动比率",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": "流动比率=流动资产÷流动负债，用于衡量企业短期偿债能力。",
+          "B": null,
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "流动比率",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e10",
+      "subject": "经济基础知识",
+      "chapter": "财政政策",
+      "knowledgePoints": [
+        "紧缩性财政政策"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "经济过热、通货膨胀压力较大时，通常适宜采取哪种财政政策？",
+      "options": [
+        {
+          "id": "A",
+          "text": "扩张性财政政策"
+        },
+        {
+          "id": "B",
+          "text": "紧缩性财政政策"
+        },
+        {
+          "id": "C",
+          "text": "中性货币政策"
+        },
+        {
+          "id": "D",
+          "text": "扩张性货币政策"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "紧缩性财政政策通过减少支出或增加税收抑制社会总需求，适合经济过热时期。",
+        "keyPoint": "紧缩性财政政策",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": "紧缩性财政政策通过减少支出或增加税收抑制社会总需求，适合经济过热时期。",
+          "C": null,
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "紧缩性财政政策",
+        "经济基础知识"
+      ]
+    },
+    {
+      "id": "e11",
+      "subject": "经济基础知识",
+      "chapter": "货币供求与货币均衡",
+      "knowledgePoints": [
+        "货币层次"
+      ],
+      "type": "single",
+      "material": null,
+      "stem": "在货币层次划分中，作为划分依据的主要是金融资产的？",
+      "options": [
+        {
+          "id": "A",
+          "text": "安全性"
+        },
+        {
+          "id": "B",
+          "text": "收益性"
+        },
+        {
+          "id": "C",
+          "text": "流动性"
+        },
+        {
+          "id": "D",
+          "text": "期限性"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 1,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "货币层次按照资产流动性，即转化为现实购买力的便利程度进行划分。",
+        "keyPoint": "货币层次",
+        "memoryTip": null,
+        "optionAnalysis": {
+          "A": null,
+          "B": null,
+          "C": "货币层次按照资产流动性，即转化为现实购买力的便利程度进行划分。",
+          "D": null
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original_demo",
+        "title": "经途示例题库",
+        "year": null,
+        "reference": null
+      },
+      "syllabusVersion": "2026-demo",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "货币层次",
+        "经济基础知识"
       ]
     }
   ]

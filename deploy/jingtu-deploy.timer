@@ -1,0 +1,12 @@
+[Unit]
+Description=Check GitHub for a verified Jingtu release
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+RandomizedDelaySec=30s
+Persistent=true
+Unit=jingtu-deploy.service
+
+[Install]
+WantedBy=timers.target

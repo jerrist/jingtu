@@ -1,0 +1,14 @@
+[Unit]
+Description=Deploy verified Jingtu main branch from GitHub
+After=network-online.target jingtu-api.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/sbin/jingtu-auto-deploy
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+
+[Install]
+WantedBy=multi-user.target
