@@ -4,6 +4,8 @@
 
 线上地址：<https://exam.jerrists.cloud>
 
+系统组成、数据流、持续集成和部署回滚说明见 [`ARCHITECTURE.md`](ARCHITECTURE.md)。
+
 ## 题库目录
 
 - `database/question-bank.sqlite`：本地题库主库，不提交到 Git。
