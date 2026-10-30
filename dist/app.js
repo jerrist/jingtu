@@ -35,8 +35,9 @@ function questionProgress(filter = () => true) {
   const questions = QUESTIONS.filter(filter);
   const attempted = questions.filter(question => (state.records[question.id]?.attempts || 0) > 0).length;
   const attempts = questions.reduce((sum, question) => sum + (state.records[question.id]?.attempts || 0), 0);
+  const mastered = questions.filter(question => state.mastered.includes(question.id) || (state.records[question.id]?.correctStreak || 0) >= 2).length;
   const total = questions.length;
-  return {total, attempted, remaining: Math.max(0, total - attempted), attempts, coverage: total ? Math.round(attempted / total * 100) : 0};
+  return {total, attempted, remaining: Math.max(0, total - attempted), attempts, mastered, coverage: total ? Math.round(attempted / total * 100) : 0};
 }
 function wrongQuestions() { return QUESTIONS.filter(q => state.records[q.id]?.wrong > 0 && !state.mastered.includes(q.id)); }
 function dueQuestions() { const now = localDate(); return wrongQuestions().filter(q => !state.records[q.id].due || state.records[q.id].due <= now); }
@@ -69,7 +70,7 @@ function mergeStates(localState, remoteState) {
   });
   merged.daily = {...remote.daily};
   Object.entries(local.daily || {}).forEach(([day, count]) => { merged.daily[day] = Math.max(merged.daily[day] || 0, count || 0); });
-  merged.mastered = [...new Set([...(remote.mastered || []), ...(local.mastered || [])])];
+  merged.mastered = Object.entries(merged.records).filter(([, record]) => (record.correctStreak || 0) >= 2).map(([id]) => id);
   const exams = [...(remote.exams || []), ...(local.exams || [])];
   merged.exams = [...new Map(exams.map(exam => [JSON.stringify(exam), exam])).values()];
   merged.streak = Math.max(remote.streak || 0, local.streak || 0);
@@ -252,7 +253,9 @@ function renderHome() {
   $("#metric-total").textContent = progress.total;
   $("#metric-attempted").textContent = progress.attempted;
   $("#metric-remaining").textContent = progress.remaining;
+  $("#metric-mastered").textContent = progress.mastered;
   $("#metric-attempts").textContent = progress.attempts;
+  $("#unseen-count").textContent = progress.remaining;
   $("#progress-owner-label").textContent = authState.user ? `${authState.user.username} 的题库进度` : "本机题库进度";
   const subjects = ["经济基础知识", "人力资源管理"];
   $("#subject-grid").innerHTML = subjects.map((s, i) => { const filter=q=>q.subject===s, a=accuracy(filter), p=questionProgress(filter); return `<article class="subject-card ${i ? "hr" : "econ"}"><div class="subject-top"><span class="subject-symbol">${i ? "人" : "经"}</span><span class="subject-score">${a.rate}<small>% 正确率</small></span></div><h3>${s}</h3><p>已做 ${p.attempted} / ${p.total} 道 · 累计作答 ${p.attempts} 次</p><div class="mini-bar" title="题库覆盖率 ${p.coverage}%"><span style="width:${p.coverage}%"></span></div></article>`; }).join("");
@@ -313,7 +316,14 @@ function answerQuiz(selected) {
 
 function recordAnswer(q, correct) {
   markStudy(); const r = state.records[q.id] || {attempts:0, correct:0, wrong:0};
-  r.attempts++; if (correct) { r.correct++; r.due = daysFromNow(r.wrong ? 3 : 7); } else { r.wrong++; r.due = daysFromNow(1); }
+  r.attempts++;
+  if (correct) {
+    r.correct++; r.correctStreak = (r.correctStreak || 0) + 1; r.due = daysFromNow(r.wrong ? 3 : 7);
+    if (r.correctStreak >= 2 && !state.mastered.includes(q.id)) state.mastered.push(q.id);
+  } else {
+    r.wrong++; r.correctStreak = 0; r.due = daysFromNow(1);
+    state.mastered = state.mastered.filter(id => id !== q.id);
+  }
   r.last = localDate(); state.records[q.id] = r; state.daily[localDate()] = todayDone() + 1; saveState();
   $("#streak").textContent = state.streak;
 }
@@ -368,9 +378,19 @@ function chapterStats(){
   const chapters=[...new Set(QUESTIONS.map(q=>q.chapter))];
   return chapters.map(chapter=>({chapter,...accuracy(q=>q.chapter===chapter)})).filter(x=>x.total);
 }
+function chapterCoverageStats(){
+  const chapters=[...new Set(QUESTIONS.map(q=>q.chapter))];
+  return chapters.map(chapter=>{
+    const filter=q=>q.chapter===chapter;
+    const question=QUESTIONS.find(filter);
+    return {chapter,subject:question?.subject||"",...questionProgress(filter),accuracy:accuracy(filter).rate};
+  });
+}
+function heatLevel(coverage){ return coverage===0?0:coverage<=25?1:coverage<=50?2:coverage<=75?3:4; }
 function renderStats(){
   const all=accuracy(), progress=questionProgress(), wrong=wrongQuestions().length, examBest=state.exams.length?Math.max(...state.exams.map(x=>x.score)):0;
-  $("#stat-strip").innerHTML=[['题库覆盖',progress.attempted+'/'+progress.total],['累计作答',all.total+' 次'],['综合正确率',all.rate+'%'],['待掌握错题',wrong+' 道'],['模考最佳',examBest+'/10']].map(x=>`<div class="stat-tile"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+  $("#stat-strip").innerHTML=[['题库覆盖',progress.attempted+'/'+progress.total],['已掌握',progress.mastered+' 道'],['累计作答',all.total+' 次'],['综合正确率',all.rate+'%'],['待掌握错题',wrong+' 道'],['模考最佳',examBest+'/10']].map(x=>`<div class="stat-tile"><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
+  $("#chapter-heatmap").innerHTML=chapterCoverageStats().map(x=>`<article class="heatmap-card heat-${heatLevel(x.coverage)}" aria-label="${x.chapter}，已做 ${x.attempted} 共 ${x.total} 道，正确率 ${x.accuracy}%"><span class="heatmap-subject">${x.subject}</span><h4>${x.chapter}</h4><div class="heatmap-values"><span>已做 ${x.attempted}/${x.total}</span><b>${x.accuracy}%</b></div></article>`).join("");
   const chapters=chapterStats().sort((a,b)=>b.total-a.total).slice(0,10);
   $("#chapter-bars").innerHTML=chapters.length?chapters.map(x=>`<div class="bar-row"><span title="${x.chapter}">${x.chapter.length>8?x.chapter.slice(0,8)+'…':x.chapter}</span><div class="bar-track"><span style="width:${x.rate}%"></span></div><b>${x.rate}%</b></div>`).join(""):`<div class="empty-state"><span>⌁</span><p>完成练习后生成章节分析。</p></div>`;
   const counts=REASONS.map(r=>({r,n:Object.values(state.records).filter(x=>x.reason===r).length})), max=Math.max(1,...counts.map(x=>x.n));
@@ -409,6 +429,7 @@ async function init(){
   const draftCount=QUESTIONS.filter(q=>q.review?.status==="draft").length;
   $("#bank-status").innerHTML=`<span>结构 v${BANK_META.schemaVersion}</span><span>题库 ${BANK_META.bankVersion}</span><span>${QUESTIONS.length} 道题</span><span>${draftCount} 道待审核</span>`;
   $("#start-daily").onclick=()=>{switchView("practice");const due=dueQuestions();const rest=QUESTIONS.filter(q=>!due.includes(q));startQuiz({questions:[...due,...shuffle(rest)].slice(0,10),mode:"daily"});};
+  $("#practice-unseen").onclick=()=>{const unseen=QUESTIONS.filter(q=>(state.records[q.id]?.attempts||0)===0);if(!unseen.length){toast("题库已经全部做过，去错题本继续巩固吧");return;}switchView("practice");startQuiz({questions:unseen,mode:"unseen"});};
   $("#start-practice").onclick=()=>{const ch=$("#chapter-select").value;startQuiz({questions:QUESTIONS.filter(q=>(practiceSubject==="all"||q.subject===practiceSubject)&&(ch==="all"||q.chapter===ch))});};
   $("#practice-weak").onclick=()=>{switchView("practice");const ch=$("#practice-weak").dataset.chapter;startQuiz({questions:QUESTIONS.filter(q=>ch==="all"||q.chapter===ch)});};
   $("#review-now").onclick=()=>switchView("review");
