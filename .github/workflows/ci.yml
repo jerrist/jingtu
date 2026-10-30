@@ -37,6 +37,9 @@ jobs:
       - name: Validate question bank
         run: npm run bank:validate
 
+      - name: Test service worker cache policy
+        run: npm run test:sw
+
       - name: Test sync API
         run: python3 server/test_jingtu_api.py
 

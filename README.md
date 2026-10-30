@@ -36,6 +36,7 @@ npm run bank:sync
 - 每次部署前都会在 `/var/lib/jingtu/backups` 创建 SQLite 一致性快照。
 - 前端按 Git 提交建立独立版本目录，失败时自动恢复之前的前端与后端。
 - 服务器运行数据库、备份、导入导出结果和发布压缩包均不会提交到 GitHub。
+- Service Worker 对页面和题库使用网络优先、离线回退；`/api/` 永不进入浏览器 Cache Storage。
 
 服务器端安装文件见 `deploy/server-auto-deploy.sh`、`deploy/jingtu-deploy.service` 和 `deploy/jingtu-deploy.timer`。
 

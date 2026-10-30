@@ -71,7 +71,7 @@ function mergeStates(localState, remoteState) {
 }
 
 async function api(path, options = {}) {
-  const response = await fetch(path, {credentials: "same-origin", headers: {"Content-Type": "application/json", ...(options.headers || {})}, ...options});
+  const response = await fetch(path, {cache: "no-store", credentials: "same-origin", headers: {"Content-Type": "application/json", ...(options.headers || {})}, ...options});
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
     const error = new Error(payload.error || `请求失败 (${response.status})`);
@@ -201,7 +201,7 @@ function typeLabel(question) {
 }
 function explanationText(question) { return question.explanation?.summary || question.explain || "暂无解析"; }
 async function loadQuestionBank() {
-  const response = await fetch("data/questions.json", { cache: "no-cache" });
+  const response = await fetch("data/questions.json", {cache: "no-store"});
   if (!response.ok) throw new Error(`题库加载失败 (${response.status})`);
   const bank = await response.json();
   if (!bank.schemaVersion || !bank.bankVersion || !Array.isArray(bank.questions)) throw new Error("题库结构无效");
@@ -363,7 +363,24 @@ function exportData(){
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`经途学习数据-${localDate()}.json`;a.click();URL.revokeObjectURL(a.href);toast("学习数据已导出");
 }
 
+async function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+  let reloading = false;
+  navigator.serviceWorker.addEventListener("controllerchange", () => {
+    if (reloading) return;
+    reloading = true;
+    location.reload();
+  });
+  try {
+    const registration = await navigator.serviceWorker.register("service-worker.js", {updateViaCache: "none"});
+    await registration.update();
+  } catch (error) {
+    console.info("Offline support unavailable", error);
+  }
+}
+
 async function init(){
+  const serviceWorkerUpdate = registerServiceWorker();
   await loadQuestionBank();
   const now=new Date();$("#today-label").textContent=now.toLocaleDateString("zh-CN",{month:"long",day:"numeric",weekday:"long"});$("#streak").textContent=state.streak;
   $$('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));
@@ -388,7 +405,7 @@ async function init(){
   $("#sync-now").onclick=()=>syncProgress();
   $("#logout-account").onclick=()=>logoutAccount();
   await restoreSession();
-  if("serviceWorker" in navigator) navigator.serviceWorker.register("service-worker.js").catch(()=>{});
+  await serviceWorkerUpdate;
 }
 init().catch(error=>{
   console.error(error);

@@ -1,6 +1,6 @@
 {
   "name": "jingtu-hr-economist",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "经途中级经济师本地题库与刷题工具",
   "scripts": {
@@ -9,6 +9,7 @@
     "bank:export": "node scripts/export-question-bank.cjs",
     "bank:validate": "node scripts/validate-question-bank.cjs",
     "bank:sync": "node scripts/sync-question-bank.cjs",
+    "test:sw": "node scripts/test-service-worker.cjs",
     "preview": "node preview-server.cjs"
   },
   "engines": {
