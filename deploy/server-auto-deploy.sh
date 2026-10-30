@@ -12,6 +12,20 @@ app_root="/var/www/jingtu"
 backend_file="/opt/jingtu/server/jingtu_api.py"
 lock_file="/run/lock/jingtu-deploy.lock"
 
+retry() {
+  local attempt=1
+  local max_attempts=3
+  until "$@"; do
+    if (( attempt >= max_attempts )); then
+      echo "命令连续失败 $max_attempts 次: $*"
+      return 1
+    fi
+    echo "命令失败，准备第 $((attempt + 1)) 次重试: $*"
+    sleep $((attempt * 2))
+    attempt=$((attempt + 1))
+  done
+}
+
 exec 9>"$lock_file"
 if ! flock -n 9; then
   echo "已有部署任务正在运行，本次跳过。"
@@ -73,11 +87,16 @@ if [[ "$ci_result" != "success" ]]; then
   exit 0
 fi
 
+if [[ -d "$source_dir/.git" ]] && [[ "$(git -C "$source_dir" config --get remote.origin.promisor || true)" == "true" ]]; then
+  echo "检测到旧的部分克隆，重建为完整浅克隆。"
+  rm -rf -- "$source_dir"
+fi
 if [[ ! -d "$source_dir/.git" ]]; then
   rm -rf -- "$source_dir"
-  git clone --filter=blob:none --no-checkout "$repo_url" "$source_dir"
+  retry git clone --depth 1 --branch "$branch" "$repo_url" "$source_dir"
 fi
-git -C "$source_dir" fetch --depth 1 origin "$remote_sha"
+retry git -C "$source_dir" fetch --depth 1 origin "$remote_sha"
+git -C "$source_dir" cat-file -e "$remote_sha^{commit}"
 
 staging_dir="$(mktemp -d "$staging_root/$remote_sha.XXXXXX")"
 release_tmp=""
