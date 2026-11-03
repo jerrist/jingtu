@@ -1,4 +1,4 @@
-const CACHE = "jingtu-v6";
+const CACHE = "jingtu-v7";
 const PRECACHE = [
   "./",
   "index.html",
@@ -7,6 +7,7 @@ const PRECACHE = [
   "app.js",
   "manifest.webmanifest",
   "icon.svg",
+  "assets/questions/mother-300/labor-supply-curve.jpg",
   "version.json"
 ];
 

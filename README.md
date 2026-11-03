@@ -16,6 +16,7 @@
 
 详细操作和日常建议见 [`题库维护指南.md`](题库维护指南.md)。
 已导入的免费公开题源、数量及未导入原因见 [`FREE_SOURCE_LOG.md`](FREE_SOURCE_LOG.md)。
+本次母题 300 题的去重、异常复核和图文题处理见 [`MOTHER_300_IMPORT_LOG.md`](MOTHER_300_IMPORT_LOG.md)。
 
 ## 初始化与同步
 
@@ -30,6 +31,8 @@ npm run bank:sync
 ## 本地预览
 
 在 `dist` 目录启动任意静态 HTTP 服务器即可。未登录时学习记录保存在浏览器 `localStorage` 中；登录后会与线上账号同步。
+
+需要复核指定题目时，可在预览地址后添加 `?question=题目ID`，例如 `http://127.0.0.1:4173/?question=mother-300-q035`。
 
 ## GitHub 与自动发布
 

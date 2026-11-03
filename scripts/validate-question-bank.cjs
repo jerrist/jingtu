@@ -7,6 +7,8 @@ const errors = [];
 const allowedTypes = new Set(["single", "multiple", "case-single", "case-multiple"]);
 const allowedFrequency = new Set(["low", "medium", "high"]);
 const allowedReview = new Set(["draft", "reviewed", "verified", "retired"]);
+const allowedMediaKinds = new Set(["image"]);
+const allowedMediaPlacements = new Set(["material", "stem", "explanation"]);
 const ids = new Set();
 
 function requireValue(condition, message) { if (!condition) errors.push(message); }
@@ -24,6 +26,14 @@ for (const [index, q] of (bank.questions || []).entries()) {
   requireValue(Array.isArray(q.knowledgePoints) && q.knowledgePoints.length > 0, `${prefix}: knowledgePoints 不能为空`);
   requireValue(allowedTypes.has(q.type), `${prefix}: 不支持的 type ${q.type}`);
   requireValue(typeof q.stem === "string" && q.stem.trim().length > 0, `${prefix}: 题干为空`);
+  requireValue(Array.isArray(q.media), `${prefix}: media 必须是数组`);
+  for (const [mediaIndex, media] of (q.media || []).entries()) {
+    const mediaPrefix = `${prefix}第 ${mediaIndex + 1} 个媒体`;
+    requireValue(allowedMediaKinds.has(media.kind), `${mediaPrefix}: kind 无效`);
+    requireValue(typeof media.src === "string" && media.src.length > 0 && !media.src.includes(".."), `${mediaPrefix}: src 无效`);
+    requireValue(typeof media.alt === "string" && media.alt.length > 0, `${mediaPrefix}: 缺少 alt`);
+    requireValue(allowedMediaPlacements.has(media.placement), `${mediaPrefix}: placement 无效`);
+  }
   requireValue(Array.isArray(q.options) && q.options.length >= 2, `${prefix}: 选项不足 2 个`);
   const optionIds = (q.options || []).map((o) => o.id);
   const optionTexts = (q.options || []).map((o) => o.text?.trim());

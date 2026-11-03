@@ -109,7 +109,12 @@ for (const filename of files) {
       if (result.status === "inserted") report.imported += 1;
       else {
         report.skipped += 1;
-        const issue = { code: result.status, message: `与题目 ${result.existingId} 重复，已跳过` };
+        const issue = {
+          code: result.status,
+          message: result.enriched
+            ? `与题目 ${result.existingId} 重复；已跳过新题并补充图文资源`
+            : `与题目 ${result.existingId} 重复，已跳过`
+        };
         report.issues.push({ row: rowNumber, questionId: question.id, severity: "warning", ...issue });
         recordIssue(db, batch.id, rowNumber, question.id, "warning", issue);
       }

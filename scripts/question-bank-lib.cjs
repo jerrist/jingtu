@@ -3,6 +3,8 @@ const crypto = require("crypto");
 const ALLOWED_TYPES = new Set(["single", "multiple", "case-single", "case-multiple"]);
 const ALLOWED_FREQUENCIES = new Set(["low", "medium", "high"]);
 const ALLOWED_REVIEW = new Set(["draft", "reviewed", "verified", "retired"]);
+const ALLOWED_MEDIA_KINDS = new Set(["image"]);
+const ALLOWED_MEDIA_PLACEMENTS = new Set(["material", "stem", "explanation"]);
 
 function firstDefined(object, names) {
   for (const name of names) {
@@ -61,6 +63,18 @@ function normalizeOptions(raw) {
   return options;
 }
 
+function normalizeMedia(value) {
+  if (!Array.isArray(value)) return [];
+  return value.filter((item) => item && typeof item === "object").map((item, index) => ({
+    id: cleanText(item.id) || `media-${index + 1}`,
+    kind: cleanText(item.kind) || "image",
+    src: cleanText(item.src),
+    alt: cleanText(item.alt),
+    caption: cleanText(item.caption) || null,
+    placement: cleanText(item.placement) || "stem"
+  }));
+}
+
 function normalizeExplanation(raw, warnings) {
   if (raw.explanation && typeof raw.explanation === "object") {
     return {
@@ -105,6 +119,7 @@ function normalizeQuestion(raw, defaults = {}) {
     type,
     material,
     stem: cleanText(firstDefined(raw, ["stem", "question", "题干", "题目"])),
+    media: normalizeMedia(raw.media),
     options,
     answers,
     scoring: raw.scoring && typeof raw.scoring === "object" ? raw.scoring : {
@@ -118,7 +133,8 @@ function normalizeQuestion(raw, defaults = {}) {
       kind: cleanText(sourceValue.kind || firstDefined(raw, ["sourceKind", "来源类型"])) || "user_import",
       title: cleanText(sourceValue.title || firstDefined(raw, ["sourceTitle", "来源标题", "来源"])) || defaults.sourceTitle || "用户导入",
       year: sourceValue.year ?? firstDefined(raw, ["sourceYear", "来源年份", "年份"]) ?? null,
-      reference: sourceValue.reference ?? firstDefined(raw, ["sourceReference", "来源引用", "出处"]) ?? null
+      reference: sourceValue.reference ?? firstDefined(raw, ["sourceReference", "来源引用", "出处"]) ?? null,
+      page: sourceValue.page ?? firstDefined(raw, ["sourcePage", "来源页码", "页码"]) ?? null
     },
     syllabusVersion: cleanText(firstDefined(raw, ["syllabusVersion", "大纲版本"]) ?? defaults.syllabusVersion) || "待校验",
     review: {
@@ -158,6 +174,14 @@ function validateQuestion(question) {
   if (["single", "case-single"].includes(question.type)) add(question.answers.length === 1, "single-answer-count", "单选题必须且只能有一个答案");
   if (["multiple", "case-multiple"].includes(question.type)) add(question.answers.length >= 2, "multiple-answer-count", "多选题至少需要两个答案");
   if (question.type.startsWith("case-")) add(Boolean(question.material), "missing-material", "案例题缺少材料");
+  add(Array.isArray(question.media), "invalid-media", "media 必须是数组");
+  for (const [index, media] of (question.media || []).entries()) {
+    const prefix = `第 ${index + 1} 个媒体`;
+    add(ALLOWED_MEDIA_KINDS.has(media.kind), "invalid-media-kind", `${prefix}类型无效：${media.kind}`);
+    add(Boolean(media.src), "missing-media-src", `${prefix}缺少 src`);
+    add(Boolean(media.alt), "missing-media-alt", `${prefix}缺少无障碍说明 alt`);
+    add(ALLOWED_MEDIA_PLACEMENTS.has(media.placement), "invalid-media-placement", `${prefix}展示位置无效：${media.placement}`);
+  }
   add(question.difficulty >= 1 && question.difficulty <= 5, "invalid-difficulty", "难度必须在 1—5 之间");
   add(ALLOWED_FREQUENCIES.has(question.frequency), "invalid-frequency", `频率无效：${question.frequency}`);
   add(ALLOWED_REVIEW.has(question.review?.status), "invalid-review", `审核状态无效：${question.review?.status}`);

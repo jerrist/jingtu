@@ -30,6 +30,7 @@ function createSchema(db) {
       type TEXT NOT NULL,
       material TEXT,
       stem TEXT NOT NULL,
+      media_json TEXT NOT NULL DEFAULT '[]',
       options_json TEXT NOT NULL,
       answers_json TEXT NOT NULL,
       scoring_json TEXT NOT NULL,
@@ -70,6 +71,9 @@ function createSchema(db) {
       FOREIGN KEY(batch_id) REFERENCES import_batches(id)
     );
   `);
+  const questionColumns = new Set(db.prepare("PRAGMA table_info(questions)").all().map((column) => column.name));
+  if (!questionColumns.has("media_json")) db.exec("ALTER TABLE questions ADD COLUMN media_json TEXT NOT NULL DEFAULT '[]'");
+  setMetadata(db, "schemaVersion", "2.1.0");
 }
 
 function setMetadata(db, key, value) {
@@ -83,18 +87,29 @@ function getMetadata(db) {
 function insertQuestion(db, question, fingerprint, sourceFile = null) {
   const byId = db.prepare("SELECT id, fingerprint FROM questions WHERE id = ?").get(question.id);
   if (byId) return { status: "duplicate-id", existingId: byId.id };
-  const byFingerprint = db.prepare("SELECT id FROM questions WHERE fingerprint = ?").get(fingerprint);
-  if (byFingerprint) return { status: "duplicate-content", existingId: byFingerprint.id };
+  const byFingerprint = db.prepare("SELECT id, media_json FROM questions WHERE fingerprint = ?").get(fingerprint);
+  if (byFingerprint) {
+    const existingMedia = JSON.parse(byFingerprint.media_json || "[]");
+    const incomingMedia = question.media || [];
+    const mediaKeys = new Set(existingMedia.map((item) => `${item.kind}:${item.src}`));
+    const mergedMedia = [...existingMedia, ...incomingMedia.filter((item) => !mediaKeys.has(`${item.kind}:${item.src}`))];
+    const enriched = mergedMedia.length > existingMedia.length;
+    if (enriched) {
+      db.prepare("UPDATE questions SET media_json = ?, updated_at = ? WHERE id = ?")
+        .run(JSON.stringify(mergedMedia), new Date().toISOString(), byFingerprint.id);
+    }
+    return { status: "duplicate-content", existingId: byFingerprint.id, enriched };
+  }
   const now = new Date().toISOString();
   db.prepare(`
     INSERT INTO questions (
       id, fingerprint, subject, chapter, knowledge_points_json, type, material, stem,
-      options_json, answers_json, scoring_json, explanation_json, difficulty, frequency,
+      media_json, options_json, answers_json, scoring_json, explanation_json, difficulty, frequency,
       source_json, syllabus_version, review_json, tags_json, source_file, imported_at, updated_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `).run(
     question.id, fingerprint, question.subject, question.chapter, JSON.stringify(question.knowledgePoints), question.type,
-    question.material, question.stem, JSON.stringify(question.options), JSON.stringify(question.answers), JSON.stringify(question.scoring),
+    question.material, question.stem, JSON.stringify(question.media || []), JSON.stringify(question.options), JSON.stringify(question.answers), JSON.stringify(question.scoring),
     JSON.stringify(question.explanation), question.difficulty, question.frequency, JSON.stringify(question.source), question.syllabusVersion,
     JSON.stringify(question.review), JSON.stringify(question.tags), sourceFile, now, now
   );
@@ -110,6 +125,7 @@ function getAllQuestions(db) {
     type: row.type,
     material: row.material,
     stem: row.stem,
+    media: JSON.parse(row.media_json || "[]"),
     options: JSON.parse(row.options_json),
     answers: JSON.parse(row.answers_json),
     scoring: JSON.parse(row.scoring_json),

@@ -210,6 +210,12 @@ function typeLabel(question) {
   return ({single:"单选题", multiple:"多选题", "case-single":"案例单选", "case-multiple":"案例多选"})[question.type] || "选择题";
 }
 function explanationText(question) { return question.explanation?.summary || question.explain || "暂无解析"; }
+function escapeAttribute(value) {
+  return String(value ?? "").replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+}
+function renderQuestionMedia(question, placement = "stem") {
+  return (question.media || []).filter(media => media.kind === "image" && media.placement === placement).map(media => `<figure class="question-media"><img src="${escapeAttribute(media.src)}" alt="${escapeAttribute(media.alt)}" loading="lazy">${media.caption ? `<figcaption>${media.caption}</figcaption>` : ""}</figure>`).join("");
+}
 async function loadQuestionBank() {
   const response = await fetch("data/questions.json", {cache: "no-store"});
   if (!response.ok) throw new Error(`题库加载失败 (${response.status})`);
@@ -289,7 +295,7 @@ function startQuiz({questions, mode="practice"}) {
 function renderQuizQuestion() {
   const {questions, index} = activeQuiz; const q = questions[index]; const rec = state.records[q.id] || {};
   activeQuiz.selected = [];
-  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 退出练习</button><span class="progress-text">第 ${index + 1} / ${questions.length} 题</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">难度 ${q.difficulty || 2}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}<h2>${q.stem}</h2>${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项后确认</div>` : ""}<div class="option-list">${q.options.map((o,i) => { const id=optionId(o,i); return `<button class="option" data-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`; }).join("")}</div>${isMultiple(q) ? `<div class="quiz-actions"><button class="primary-button" id="confirm-answer" disabled>确认答案 <span>→</span></button></div>` : ""}<div id="answer-feedback"></div></article></div>`;
+  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 退出练习</button><span class="progress-text">第 ${index + 1} / ${questions.length} 题</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">难度 ${q.difficulty || 2}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}${renderQuestionMedia(q, "material")}<h2>${q.stem}</h2>${renderQuestionMedia(q, "stem")}${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项后确认</div>` : ""}<div class="option-list">${q.options.map((o,i) => { const id=optionId(o,i); return `<button class="option" data-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`; }).join("")}</div>${isMultiple(q) ? `<div class="quiz-actions"><button class="primary-button" id="confirm-answer" disabled>确认答案 <span>→</span></button></div>` : ""}<div id="answer-feedback"></div></article></div>`;
   $("#quit-quiz").onclick = quitQuiz;
   $$('[data-option]', $("#quiz-stage")).forEach(b => b.onclick = () => isMultiple(q) ? toggleQuizOption(b.dataset.option, b) : answerQuiz([b.dataset.option]));
   if (isMultiple(q)) $("#confirm-answer").onclick = () => answerQuiz(activeQuiz.selected);
@@ -309,7 +315,7 @@ function answerQuiz(selected) {
   $$('[data-option]', $("#quiz-stage")).forEach((b) => { const id=b.dataset.option; b.disabled = true; if (expected.includes(id)) b.classList.add("correct"); if (selected.includes(id) && !expected.includes(id)) b.classList.add("wrong"); });
   if ($("#confirm-answer")) $("#confirm-answer").remove();
   recordAnswer(q, correct);
-  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${expected.join("、")}。`}</h4><p>${explanationText(q)}</p>${q.explanation?.memoryTip ? `<p><b>记忆提示：</b>${q.explanation.memoryTip}</p>` : ""}${correct ? "" : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="primary-button" id="next-question">${activeQuiz.index === activeQuiz.questions.length-1 ? "查看结果" : "下一题"} <span>→</span></button></div>`;
+  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${expected.join("、")}。`}</h4><p>${explanationText(q)}</p>${renderQuestionMedia(q, "explanation")}${q.explanation?.memoryTip ? `<p><b>记忆提示：</b>${q.explanation.memoryTip}</p>` : ""}${correct ? "" : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="primary-button" id="next-question">${activeQuiz.index === activeQuiz.questions.length-1 ? "查看结果" : "下一题"} <span>→</span></button></div>`;
   $$('[data-reason]').forEach(b => b.onclick = () => { $$('[data-reason]').forEach(x => x.classList.remove("active")); b.classList.add("active"); state.records[q.id].reason = b.dataset.reason; saveState(); toast("已记录错因"); });
   $("#next-question").onclick = nextQuiz;
 }
@@ -357,7 +363,7 @@ function startExam() {
 function updateTimer(){ const m=String(Math.floor(activeExam.remaining/60)).padStart(2,"0"),s=String(activeExam.remaining%60).padStart(2,"0"); const el=$("#exam-timer"); if(el) el.textContent=`${m}:${s}`; }
 function renderExam() {
   const q=activeExam.questions[activeExam.index], chosen=activeExam.answers[q.id] || [];
-  $("#exam-stage").innerHTML=`<div class="exam-top"><button class="ghost-button" id="quit-exam">退出模考</button><span class="timer" id="exam-timer"></span></div><div class="exam-grid"><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">第 ${activeExam.index+1} 题</span></div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}<h2>${q.stem}</h2>${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项</div>` : ""}<div class="option-list">${q.options.map((o,i)=>{const id=optionId(o,i);return `<button class="option ${chosen.includes(id)?"selected":""}" data-exam-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`;}).join("")}</div><div class="quiz-actions">${activeExam.index?`<button class="ghost-button" id="exam-prev">上一题</button>`:""}<button class="primary-button" id="exam-next">${activeExam.index===activeExam.questions.length-1?"交卷":"下一题"} <span>→</span></button></div></article><aside class="answer-sheet"><h3>答题卡</h3><div class="sheet-grid">${activeExam.questions.map((x,i)=>`<button class="sheet-button ${(activeExam.answers[x.id] || []).length?"done":""} ${i===activeExam.index?"current":""}" data-sheet="${i}">${i+1}</button>`).join("")}</div></aside></div>`;
+  $("#exam-stage").innerHTML=`<div class="exam-top"><button class="ghost-button" id="quit-exam">退出模考</button><span class="timer" id="exam-timer"></span></div><div class="exam-grid"><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">第 ${activeExam.index+1} 题</span></div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}${renderQuestionMedia(q, "material")}<h2>${q.stem}</h2>${renderQuestionMedia(q, "stem")}${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项</div>` : ""}<div class="option-list">${q.options.map((o,i)=>{const id=optionId(o,i);return `<button class="option ${chosen.includes(id)?"selected":""}" data-exam-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`;}).join("")}</div><div class="quiz-actions">${activeExam.index?`<button class="ghost-button" id="exam-prev">上一题</button>`:""}<button class="primary-button" id="exam-next">${activeExam.index===activeExam.questions.length-1?"交卷":"下一题"} <span>→</span></button></div></article><aside class="answer-sheet"><h3>答题卡</h3><div class="sheet-grid">${activeExam.questions.map((x,i)=>`<button class="sheet-button ${(activeExam.answers[x.id] || []).length?"done":""} ${i===activeExam.index?"current":""}" data-sheet="${i}">${i+1}</button>`).join("")}</div></aside></div>`;
   updateTimer();
   $$('[data-exam-option]').forEach(b=>b.onclick=()=>{const id=b.dataset.examOption;if(isMultiple(q)){const values=activeExam.answers[q.id]||[];activeExam.answers[q.id]=values.includes(id)?values.filter(value=>value!==id):[...values,id];}else activeExam.answers[q.id]=[id];renderExam();});
   $$('[data-sheet]').forEach(b=>b.onclick=()=>{activeExam.index=Number(b.dataset.sheet);renderExam();});
@@ -445,6 +451,12 @@ async function init(){
   $("#sync-now").onclick=()=>syncProgress();
   $("#logout-account").onclick=()=>logoutAccount();
   await restoreSession();
+  const directQuestionId = new URLSearchParams(location.search).get("question");
+  const directQuestion = QUESTIONS.find(question => question.id === directQuestionId);
+  if (directQuestion) {
+    switchView("practice");
+    startQuiz({questions: [directQuestion], mode: "direct"});
+  }
   await serviceWorkerUpdate;
 }
 init().catch(error=>{

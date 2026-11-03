@@ -37,6 +37,9 @@ jobs:
       - name: Validate question bank
         run: npm run bank:validate
 
+      - name: Test question media integration
+        run: npm run test:media
+
       - name: Test service worker cache policy
         run: npm run test:sw
 
