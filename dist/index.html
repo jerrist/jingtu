@@ -161,7 +161,10 @@
             <button class="exam-mode-card" data-exam-mode="hr"><b>人力专项</b><span>人力资源 · 30 题 · 35 分钟</span></button>
             <button class="exam-mode-card" data-exam-mode="econ"><b>经济专项</b><span>经济基础 · 30 题 · 35 分钟</span></button>
             <button class="exam-mode-card" data-exam-mode="sprint"><b>冲刺模考</b><span>高频薄弱题 · 20 题 · 25 分钟</span></button>
+            <button class="exam-mode-card full-paper" data-exam-mode="full-econ"><b>2026 经济基础完整套卷</b><span>70 单选 + 35 多选 · 105 题 · 90 分钟 · 140 分</span></button>
+            <button class="exam-mode-card full-paper" data-exam-mode="full-hr"><b>2026 人力实务完整套卷</b><span>60 单选 + 20 多选 + 20 案例 · 100 题 · 90 分钟 · 140 分</span></button>
           </div>
+          <p class="exam-rules-copy">按 2026 年初中级经济考试安排配置：两科均为电子化客观题考试，每科 90 分钟。人力题库的独立案例题仍在补充，组卷时会明确标注同分值题型补足数量。</p>
           <button class="primary-button large" id="start-exam">开始本场模考 <span>→</span></button>
         </div>
         <div id="exam-stage" class="hidden"></div>
@@ -170,6 +173,16 @@
       <section class="view" id="view-stats">
         <div class="section-heading compact"><div><p class="eyebrow">学习报告</p><h2>看清进步，也看清缺口</h2></div><button class="ghost-button" id="export-data">导出学习数据</button></div>
         <div class="stat-strip" id="stat-strip"></div>
+        <article class="panel trend-panel">
+          <div class="panel-title"><div><p class="eyebrow">最近学习趋势</p><h3>正确率、学习时长与复习完成率</h3></div><div class="reason-filters compact"><button class="filter-chip active" data-trend-days="7">近 7 天</button><button class="filter-chip" data-trend-days="30">近 30 天</button></div></div>
+          <div class="trend-summary" id="trend-summary"></div>
+          <div class="trend-legend"><span><i class="accuracy"></i>正确率</span><span><i class="duration"></i>学习时长</span><span><i class="review"></i>复习完成率</span></div>
+          <div class="trend-chart" id="trend-chart"></div>
+        </article>
+        <article class="panel speed-panel">
+          <div class="panel-title"><div><p class="eyebrow">做题速度诊断</p><h3>会做，但可能太慢</h3></div><span class="subtle">单选 90 秒 · 多选/案例 150 秒</span></div>
+          <div class="speed-insights" id="speed-insights"></div>
+        </article>
         <article class="panel chapter-heatmap-panel">
           <div class="panel-title">
             <div><p class="eyebrow">覆盖率 × 正确率</p><h3>章节覆盖热力图</h3></div>
@@ -186,6 +199,15 @@
           <article class="panel"><div class="panel-title"><h3>章节掌握度</h3><span class="legend"><i></i>答题正确率</span></div><div id="chapter-bars" class="chapter-bars"></div></article>
           <article class="panel"><div class="panel-title"><h3>错误原因分布</h3></div><div id="reason-chart" class="reason-chart"></div></article>
         </div>
+        <article class="panel option-progress-panel">
+          <div class="panel-title"><div><p class="eyebrow">题库内容完善</p><h3>选项级错误理由</h3></div><span class="subtle">优先提取已有解析中的明确依据</span></div>
+          <div id="option-analysis-progress"></div>
+        </article>
+        <article class="panel feedback-center-panel">
+          <div class="panel-title"><div><p class="eyebrow">本机反馈闭环</p><h3>题目反馈审核中心</h3></div><button class="text-button" data-feedback-filter="all">查看全部</button></div>
+          <div class="feedback-stats" id="feedback-stats"></div>
+          <div class="feedback-review-list" id="feedback-list"></div>
+        </article>
         <div class="panel data-note"><span>i</span><p><b>关于学习数据</b><br />未登录时记录保存在当前浏览器；登录后会自动同步到云端，可在不同设备继续学习。仍建议定期导出备份。</p></div>
       </section>
     </main>

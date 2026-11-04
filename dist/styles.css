@@ -239,3 +239,56 @@ dialog::backdrop { background: rgba(14,34,35,.56); backdrop-filter: blur(3px); }
 @media (max-width: 560px) {
   .topbar h1 { font-size: 23px; }.streak-pill,.sync-pill { display: none; }.top-actions { gap: 7px; }.daily-card { display: block; min-height: 385px; }.progress-orbit { position: absolute; right: 20px; bottom: 18px; width: 118px; height: 118px; }.progress-orbit strong { font-size: 29px; }.bank-progress-card { padding: 21px 18px; }.bank-progress-head { align-items: flex-start; }.bank-progress-head h2 { font-size: 19px; }.bank-progress-actions { align-items: flex-end; flex-direction: column; }.bank-progress-actions .secondary-button { font-size: 10px; padding: 8px 10px; }.bank-progress-metrics { grid-template-columns: 1fr 1fr; }.mastery-metric { grid-column: span 2; }.chapter-heatmap { grid-template-columns: 1fr; }.subject-grid { grid-template-columns: 1fr; }.section-heading { align-items: flex-start; gap: 14px; }.section-heading .ghost-button { display: none; }.stat-strip { grid-template-columns: 1fr 1fr; }.bar-row { grid-template-columns: 88px 1fr 33px; }.wrong-card { grid-template-columns: 1fr; }.exam-rules { gap: 20px; }.question-card { padding: 22px 18px; }.auth-actions { grid-template-columns: 1fr; }.resume-card { align-items: stretch; flex-direction: column; }.quick-mode-grid,.exam-mode-grid { grid-template-columns: 1fr; }.report-toolbar { align-items: stretch; flex-direction: column; }.report-toolbar select { width: 100%; }
 }
+/* v0.6 learning intelligence */
+.exam-mode-card.full-paper { grid-column: span 2; border-color: rgba(35,99,95,.25); background: linear-gradient(135deg,#f4faf8,#fffaf0); }
+.exam-mode-card.full-paper b { color: var(--ink); }
+.exam-rules-copy,.exam-rule-note { margin: 18px auto 0; max-width: 820px; padding: 12px 16px; border-radius: 12px; background: #f3f7f6; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.exam-rule-note { margin: 0 0 16px; max-width: none; border-left: 3px solid var(--amber); }
+.trend-panel,.speed-panel,.option-progress-panel,.feedback-center-panel { margin-top: 22px; }
+.trend-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:18px 0; }
+.trend-summary>div { padding:16px; border-radius:14px; background:#f6f8f7; display:grid; gap:4px; }
+.trend-summary span,.trend-summary small { color:var(--muted); }
+.trend-summary strong { font-size:24px; color:var(--ink); }
+.trend-legend { display:flex; gap:18px; justify-content:flex-end; color:var(--muted); font-size:12px; }
+.trend-legend i { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:5px; }
+.trend-legend .accuracy,.trend-bars .accuracy { background:#2f766e; }
+.trend-legend .duration,.trend-bars .duration { background:#e2a53c; }
+.trend-legend .review,.trend-bars .review { background:#d66a55; }
+.trend-chart { height:190px; display:flex; gap:6px; align-items:stretch; overflow-x:auto; padding:16px 2px 2px; }
+.trend-day { flex:1 0 22px; min-width:22px; display:grid; grid-template-rows:1fr 20px; gap:6px; text-align:center; }
+.trend-bars { display:flex; align-items:flex-end; justify-content:center; gap:2px; border-bottom:1px solid #dfe7e4; }
+.trend-bars i { width:5px; min-height:2px; border-radius:5px 5px 0 0; opacity:.9; }
+.trend-day>span { font-size:10px; color:var(--muted); white-space:nowrap; }
+.speed-insights { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.speed-card { appearance:none; border:1px solid var(--line); border-radius:14px; background:#fff; padding:16px; text-align:left; cursor:pointer; color:inherit; }
+.speed-card:hover { border-color:#6f9e98; transform:translateY(-1px); }
+.speed-card>span { color:var(--teal); font-size:12px; }
+.speed-card h4 { margin:6px 0; }
+.speed-card p { margin:0 0 6px; color:var(--muted); }
+.speed-card small { color:var(--muted); }
+#option-analysis-progress>div:first-child { display:flex; align-items:baseline; gap:10px; margin:12px 0; }
+#option-analysis-progress strong { font-size:32px; color:var(--teal); }
+#option-analysis-progress p { color:var(--muted); margin-bottom:0; }
+.option-analysis-row.pending { background:#faf8f3; }
+.option-analysis-row.pending span { color:#887b65; }
+.feedback-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0; }
+.feedback-stat { border:1px solid var(--line); background:#f7f9f8; border-radius:12px; padding:12px 14px; display:flex; justify-content:space-between; align-items:center; cursor:pointer; color:var(--ink); }
+.feedback-stat.active { border-color:var(--teal); background:#edf6f4; }
+.feedback-stat strong { font-size:22px; }
+.feedback-review-list { display:grid; gap:12px; }
+.feedback-review-card { border:1px solid var(--line); border-radius:14px; padding:16px; display:grid; grid-template-columns:1fr auto; gap:18px; align-items:center; }
+.feedback-review-card h4 { margin:8px 0; font-size:15px; line-height:1.6; }
+.feedback-review-card p { margin:0 0 4px; color:var(--muted); }
+.feedback-actions { display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+.status-badge { display:inline-block; padding:3px 8px; border-radius:999px; margin-right:8px; font-size:11px; background:#f4e6c7; color:#815d13; }
+.status-badge.processing { background:#dfedf5; color:#2e6685; }
+.status-badge.resolved { background:#def0e8; color:#256750; }
+.reason-filters.compact { margin:0; }
+.empty-state.compact { min-height:130px; }
+@media (max-width: 760px) {
+  .exam-mode-card.full-paper { grid-column:span 1; }
+  .trend-summary,.feedback-stats { grid-template-columns:1fr; }
+  .speed-insights { grid-template-columns:1fr; }
+  .feedback-review-card { grid-template-columns:1fr; }
+  .feedback-actions { justify-content:flex-start; }
+}

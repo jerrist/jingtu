@@ -7,6 +7,10 @@ globalThis.__learningTest = {
   scheduleReview,
   scoreExamQuestion,
   selectSmartQuestions,
+  buildRulePaper,
+  derivedOptionAnalysis,
+  trendSeries,
+  speedInsights,
   setState(value) { state = {...DEFAULT_STATE, ...value}; },
   setQuestions(value) { QUESTIONS = value; }
 };`;
@@ -48,5 +52,17 @@ const questions = [
 engine.setQuestions(questions);
 engine.setState({records:{due:{attempts:1, wrong:1, due:"2000-01-01"}}, important:[], mastered:[]});
 assert.strictEqual(engine.selectSmartQuestions(questions, 1, "daily")[0].id, "due");
+
+const econQuestions=[...Array(70)].map((_,i)=>({id:`s${i}`,subject:"经济基础知识",type:"single"})).concat([...Array(35)].map((_,i)=>({id:`m${i}`,subject:"经济基础知识",type:"multiple"})));
+engine.setQuestions(econQuestions);
+const paper=engine.buildRulePaper("full-econ");
+assert.strictEqual(paper.questions.length,105);
+assert.strictEqual(paper.questions.reduce((sum,item)=>sum+item._examScore,0),140);
+
+const parsed=engine.derivedOptionAnalysis({options:[{id:"A"},{id:"B"}],answers:["A"],explanation:{summary:"选项 A 正确；选项 B 错误，因为混淆了概念。",optionAnalysis:{}}});
+assert.ok(parsed.A&&parsed.B,"explicit option reasons should be derived from summary");
+
+engine.setState({answerLog:[{date:new Date().toLocaleDateString("sv-SE"),correct:true,durationMs:100000,subject:"人力资源管理",chapter:"绩效管理",knowledgePoint:"绩效评价",type:"single"},{date:new Date().toLocaleDateString("sv-SE"),correct:true,durationMs:110000,subject:"人力资源管理",chapter:"绩效管理",knowledgePoint:"绩效评价",type:"single"}],reviewDaily:{}});
+assert.strictEqual(engine.speedInsights()[0].name,"绩效评价");
 
 console.log("Learning feature tests passed");

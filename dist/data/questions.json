@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.1.0",
-  "bankVersion": "local-20261103.490",
+  "bankVersion": "local-20261104.495",
   "syllabusVersion": "2026-demo",
   "locale": "zh-CN",
   "title": "经途中级经济师示例题库",
   "description": "产品功能验证用原创示例题库，尚未按正式考试大纲完成审核。",
-  "updatedAt": "2026-11-03",
+  "updatedAt": "2026-11-04",
   "questions": [
     {
       "id": "free-2024-hr-q001",
@@ -5258,6 +5258,142 @@
       ]
     },
     {
+      "id": "hr-case-2026-003",
+      "subject": "人力资源管理",
+      "chapter": "人力资源规划",
+      "knowledgePoints": [
+        "人员接续计划"
+      ],
+      "type": "case-single",
+      "material": "某制造企业预计未来三年将有多名核心技术人员退休。公司已识别关键岗位，建立候选人才库，并根据岗位胜任要求为候选人安排轮岗、导师辅导和项目历练。",
+      "stem": "该企业正在实施的规划工具主要是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "马尔科夫分析法"
+        },
+        {
+          "id": "B",
+          "text": "人员接续计划"
+        },
+        {
+          "id": "C",
+          "text": "趋势预测法"
+        },
+        {
+          "id": "D",
+          "text": "德尔菲法"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "识别关键岗位、建立内部候选人梯队并进行针对性培养，是人员接续计划的典型做法。",
+        "keyPoint": "人员接续计划",
+        "memoryTip": "关键岗位、候选梯队、提前培养，指向接续计划。",
+        "optionAnalysis": {
+          "A": "错误。马尔科夫分析法用于根据人员转移概率预测内部供给。",
+          "B": "正确。材料描述了关键岗位继任者识别与培养的完整接续过程。",
+          "C": "错误。趋势预测法根据历史业务量与人员需求关系预测需求。",
+          "D": "错误。德尔菲法通过多轮匿名专家意见形成预测。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 套卷补充题",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "人员接续计划"
+      ]
+    },
+    {
+      "id": "hr-case-2026-004",
+      "subject": "人力资源管理",
+      "chapter": "人力资源规划",
+      "knowledgePoints": [
+        "内部人力资源供给预测"
+      ],
+      "type": "case-multiple",
+      "material": "某制造企业预计未来三年将有多名核心技术人员退休。公司已识别关键岗位，建立候选人才库，并根据岗位胜任要求为候选人安排轮岗、导师辅导和项目历练。",
+      "stem": "该计划有效实施通常需要哪些基础条件？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "明确关键岗位及其胜任要求"
+        },
+        {
+          "id": "B",
+          "text": "持续评估候选人的准备度"
+        },
+        {
+          "id": "C",
+          "text": "只从企业外部选择继任者"
+        },
+        {
+          "id": "D",
+          "text": "为候选人提供有针对性的开发机会"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "接续计划需要明确关键岗位、识别和评估候选人，并通过轮岗、辅导等开发活动提升准备度；候选人可以来自内部，也可以在必要时从外部补充。",
+        "keyPoint": "内部人力资源供给预测",
+        "memoryTip": "先定岗位，再看人选，持续培养和评估。",
+        "optionAnalysis": {
+          "A": "正确。没有关键岗位和胜任要求，就无法判断继任人选是否匹配。",
+          "B": "正确。准备度评估用于判断候选人距离胜任岗位还有多大差距。",
+          "C": "错误。接续计划通常重视内部梯队，也不排斥必要的外部补充，不能限定为只从外部选择。",
+          "D": "正确。轮岗、导师辅导和项目历练都是有针对性的开发机会。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 套卷补充题",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "供给预测"
+      ]
+    },
+    {
       "id": "h07",
       "subject": "人力资源管理",
       "chapter": "人员甄选",
@@ -6050,6 +6186,141 @@
       ]
     },
     {
+      "id": "hr-case-2026-001",
+      "subject": "人力资源管理",
+      "chapter": "绩效管理",
+      "knowledgePoints": [
+        "绩效评价误区"
+      ],
+      "type": "case-multiple",
+      "material": "某互联网企业在年终绩效评价中，部门经理主要依据员工最近一个月的表现打分；对与自己沟通顺畅的员工普遍给出高分，并要求所有团队成员必须按固定比例分布在各绩效等级。人力资源部门准备对评价流程进行改进。",
+      "stem": "该部门经理的评价行为可能涉及哪些绩效评价误区？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "近因效应"
+        },
+        {
+          "id": "B",
+          "text": "相似者偏差"
+        },
+        {
+          "id": "C",
+          "text": "强制分布法本身必然无效"
+        },
+        {
+          "id": "D",
+          "text": "对比效应"
+        }
+      ],
+      "answers": [
+        "A",
+        "B"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "经理过度依赖最近一个月表现，属于近因效应；因沟通顺畅而普遍给高分，体现相似者偏差。强制分布法并非必然无效，材料也没有员工相互比较导致评分偏差的明确信息。",
+        "keyPoint": "绩效评价误区",
+        "memoryTip": "最近表现是近因，相似特征是相似者偏差。",
+        "optionAnalysis": {
+          "A": "正确。只重视最近阶段的表现，忽略整个评价周期，是近因效应。",
+          "B": "正确。因与评价者沟通方式相近而获得更高评价，属于相似者偏差。",
+          "C": "错误。强制分布法有适用条件和局限，但不能据此断言该方法本身必然无效。",
+          "D": "错误。对比效应强调员工之间相互比较造成偏差，材料未提供这一依据。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 套卷补充题",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "绩效评价误区"
+      ]
+    },
+    {
+      "id": "hr-case-2026-002",
+      "subject": "人力资源管理",
+      "chapter": "绩效管理",
+      "knowledgePoints": [
+        "绩效改进"
+      ],
+      "type": "case-single",
+      "material": "某互联网企业在年终绩效评价中，部门经理主要依据员工最近一个月的表现打分；对与自己沟通顺畅的员工普遍给出高分，并要求所有团队成员必须按固定比例分布在各绩效等级。人力资源部门准备对评价流程进行改进。",
+      "stem": "为降低评价误差，最优先采取的措施是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "只保留部门经理一名评价者"
+        },
+        {
+          "id": "B",
+          "text": "建立关键事件记录并开展评价者培训"
+        },
+        {
+          "id": "C",
+          "text": "取消全部绩效等级"
+        },
+        {
+          "id": "D",
+          "text": "将评价周期缩短为一个月"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "持续记录关键事件能减少评价者对近期表现的过度依赖，评价者培训可帮助识别并控制常见评价误区，因此 B 最合适。",
+        "keyPoint": "绩效改进",
+        "memoryTip": "有记录，才能看全周期；有培训，才能控偏差。",
+        "optionAnalysis": {
+          "A": "错误。单一评价来源无法降低材料中的主观偏差。",
+          "B": "正确。关键事件记录覆盖整个周期，评价者培训可以减少近因效应和相似者偏差。",
+          "C": "错误。是否设置等级与如何降低评价误差不是同一个问题。",
+          "D": "错误。缩短周期可能进一步放大对近期表现的依赖。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 套卷补充题",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "绩效改进"
+      ]
+    },
+    {
       "id": "h11",
       "subject": "人力资源管理",
       "chapter": "薪酬管理",
@@ -6179,6 +6450,75 @@
       "tags": [
         "技能薪酬体系",
         "人力资源管理"
+      ]
+    },
+    {
+      "id": "hr-case-2026-005",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "职位评价"
+      ],
+      "type": "case-multiple",
+      "material": "某企业准备重建薪酬体系。项目组先分析各职位的职责和任职要求，再从技能、责任、努力程度和工作条件等要素出发，为每个职位分别计分，并根据总分确定职位等级。",
+      "stem": "关于该企业采用的职位评价方法，下列说法正确的是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "该方法属于要素计点法"
+        },
+        {
+          "id": "B",
+          "text": "需要事先确定并定义报酬要素"
+        },
+        {
+          "id": "C",
+          "text": "该方法完全不需要主观判断"
+        },
+        {
+          "id": "D",
+          "text": "评价对象是职位的相对价值而非任职者个人绩效"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "按多个报酬要素分别赋点并汇总确定职位等级，属于要素计点法。该方法需要选择、定义和加权报酬要素，仍包含专业判断；评价的是职位相对价值。",
+        "keyPoint": "职位评价",
+        "memoryTip": "要素拆开、逐项计点、汇总定级。",
+        "optionAnalysis": {
+          "A": "正确。材料中的分要素赋分和总分定级是要素计点法的核心特征。",
+          "B": "正确。实施前需要明确技能、责任等报酬要素及其等级定义。",
+          "C": "错误。要素选择、权重确定和等级判断都需要专业判断，不可能完全消除主观性。",
+          "D": "正确。职位评价比较的是职位本身对组织的相对价值，不是评价任职者的个人绩效。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 套卷补充题",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "职位评价"
       ]
     },
     {
