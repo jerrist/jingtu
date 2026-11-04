@@ -73,6 +73,11 @@
           </article>
         </div>
 
+        <article class="resume-card hidden" id="resume-session-card">
+          <div><p class="eyebrow">继续学习</p><h3 id="resume-session-title">上次练习还没有完成</h3><p id="resume-session-copy"></p></div>
+          <div class="resume-actions"><button class="secondary-button" id="discard-session">放弃</button><button class="primary-button" id="resume-session">继续练习 <span>→</span></button></div>
+        </article>
+
         <article class="bank-progress-card" aria-labelledby="bank-progress-title">
           <div class="bank-progress-head">
             <div>
@@ -102,7 +107,7 @@
 
         <div class="lower-grid">
           <article class="panel review-panel">
-            <div class="panel-title"><div><p class="eyebrow">遗忘曲线</p><h3>今天该复习的错题</h3></div><span class="number-badge" id="due-count">0</span></div>
+            <div class="panel-title"><div><p class="eyebrow">间隔复习</p><h3>今天该复习的题</h3></div><span class="number-badge" id="due-count">0</span></div>
             <div class="review-empty" id="review-preview">
               <span>✓</span><div><b>暂时没有到期错题</b><p>做错的题会在合适的时间回来找你。</p></div>
             </div>
@@ -125,6 +130,11 @@
             <button class="setup-card" data-subject="人力资源管理"><span class="setup-icon coral">人</span><b>人力资源管理</b><small>组织、战略、招聘、绩效、薪酬、劳动关系</small></button>
           </div>
           <div class="bank-status" id="bank-status" aria-live="polite"></div>
+          <div class="quick-mode-grid">
+            <button class="quick-mode-card sprint" id="start-sprint"><span>⚡</span><b>考前冲刺</b><small>高频题、错题和未掌握题</small></button>
+            <button class="quick-mode-card" id="practice-favorites"><span>★</span><b>收藏题</b><small><b id="favorite-count">0</b> 道已收藏</small></button>
+            <button class="quick-mode-card" id="practice-important"><span>⚑</span><b>重点题</b><small><b id="important-count">0</b> 道已标记</small></button>
+          </div>
           <div class="chapter-picker">
             <label for="chapter-select">章节范围</label>
             <select id="chapter-select"><option value="all">全部章节</option></select>
@@ -135,7 +145,7 @@
       </section>
 
       <section class="view" id="view-review">
-        <div class="section-heading compact"><div><p class="eyebrow">错题闭环</p><h2>错过一次，就多懂一点</h2></div><span class="subtle" id="wrong-summary"></span></div>
+        <div class="section-heading compact"><div><p class="eyebrow">间隔复习</p><h2>该复习的，现在刚刚好</h2></div><span class="subtle" id="wrong-summary"></span></div>
         <div class="reason-filters" id="reason-filters"></div>
         <div class="wrong-list" id="wrong-list"></div>
       </section>
@@ -143,11 +153,16 @@
       <section class="view" id="view-exam">
         <div id="exam-intro" class="exam-intro">
           <span class="exam-seal">模</span>
-          <p class="eyebrow">15 分钟小模考</p>
-          <h2>关掉提示，检验真正掌握</h2>
-          <p>随机抽取双科 10 道题，支持单选、多选和案例材料。交卷前不显示答案，支持题卡跳转和倒计时自动交卷。</p>
-          <div class="exam-rules"><span><b>10</b> 道题</span><span><b>15</b> 分钟</span><span><b>10</b> 分满分</span></div>
-          <button class="primary-button large" id="start-exam">开始模拟考试 <span>→</span></button>
+          <p class="eyebrow">分科 × 分层模考</p>
+          <h2>选一场适合现在的考试</h2>
+          <p>按题目分值计分，多选题支持无错项时的部分得分。交卷前不显示答案，支持题卡跳转、未答提醒和倒计时。</p>
+          <div class="exam-mode-grid">
+            <button class="exam-mode-card selected" data-exam-mode="mixed"><b>快速混合</b><span>双科 · 10 题 · 15 分钟</span></button>
+            <button class="exam-mode-card" data-exam-mode="hr"><b>人力专项</b><span>人力资源 · 30 题 · 35 分钟</span></button>
+            <button class="exam-mode-card" data-exam-mode="econ"><b>经济专项</b><span>经济基础 · 30 题 · 35 分钟</span></button>
+            <button class="exam-mode-card" data-exam-mode="sprint"><b>冲刺模考</b><span>高频薄弱题 · 20 题 · 25 分钟</span></button>
+          </div>
+          <button class="primary-button large" id="start-exam">开始本场模考 <span>→</span></button>
         </div>
         <div id="exam-stage" class="hidden"></div>
       </section>
@@ -159,6 +174,10 @@
           <div class="panel-title">
             <div><p class="eyebrow">覆盖率 × 正确率</p><h3>章节覆盖热力图</h3></div>
             <span class="subtle">颜色越深，练习覆盖越充分</span>
+          </div>
+          <div class="report-toolbar">
+            <div class="reason-filters" id="report-subject-filters"></div>
+            <select id="report-sort" aria-label="章节排序"><option value="coverage">按覆盖缺口</option><option value="accuracy">按正确率</option><option value="wrong">按错题数</option></select>
           </div>
           <div class="heatmap-legend"><span><i class="heat-0"></i>未开始</span><span><i class="heat-1"></i>1–25%</span><span><i class="heat-2"></i>26–50%</span><span><i class="heat-3"></i>51–75%</span><span><i class="heat-4"></i>76–100%</span></div>
           <div id="chapter-heatmap" class="chapter-heatmap"></div>
@@ -207,6 +226,17 @@
         <button class="text-button danger-text" id="logout-account">退出登录</button>
       </div>
     </div>
+  </dialog>
+
+  <dialog id="feedback-dialog">
+    <form method="dialog" id="feedback-form" class="feedback-dialog-body">
+      <div class="dialog-head"><div><p class="eyebrow">题目反馈</p><h2>哪里需要修正？</h2></div><button value="cancel" class="close-button" aria-label="关闭">×</button></div>
+      <p class="feedback-question" id="feedback-question"></p>
+      <label>问题类型<select id="feedback-reason"><option>答案可能有误</option><option>题干或选项有误</option><option>解析不清楚</option><option>图片无法显示</option><option>其他问题</option></select></label>
+      <label>补充说明<textarea id="feedback-note" rows="4" maxlength="500" placeholder="可选：说明你认为有问题的地方"></textarea></label>
+      <p class="form-hint">反馈会保存在本机学习数据中，导出学习数据时一并带出。</p>
+      <button value="default" class="primary-button full" id="save-feedback">保存反馈</button>
+    </form>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
