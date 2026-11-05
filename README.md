@@ -17,6 +17,7 @@
 详细操作和日常建议见 [`题库维护指南.md`](题库维护指南.md)。
 已导入的免费公开题源、数量及未导入原因见 [`FREE_SOURCE_LOG.md`](FREE_SOURCE_LOG.md)。
 本次母题 300 题的去重、异常复核和图文题处理见 [`MOTHER_300_IMPORT_LOG.md`](MOTHER_300_IMPORT_LOG.md)。
+本次 8 份密押卷的转换、去重和质量检查见 [`PACK_1_IMPORT_LOG.md`](PACK_1_IMPORT_LOG.md)。
 
 ## 初始化与同步
 

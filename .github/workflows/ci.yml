@@ -33,12 +33,19 @@ jobs:
           node --check dist/app.js
           node --check dist/service-worker.js
           node --check preview-server.cjs
+          node --check scripts/convert-pack-1.cjs
 
       - name: Validate question bank
         run: npm run bank:validate
 
       - name: Test question media integration
         run: npm run test:media
+
+      - name: Test option analysis completeness
+        run: npm run test:options
+
+      - name: Test learning features
+        run: npm run test:learning
 
       - name: Test service worker cache policy
         run: npm run test:sw
