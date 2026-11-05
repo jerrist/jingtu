@@ -506,9 +506,9 @@ function derivedOptionAnalysis(question) {
 }
 
 function optionAnalysisCoverage() {
-  let total=0,filled=0;
-  QUESTIONS.forEach(question=>{const analysis=derivedOptionAnalysis(question);question.options.forEach((option,index)=>{total++;if(analysis[optionId(option,index)])filled++;});});
-  return {total,filled,pending:total-filled,rate:total?Math.round(filled/total*100):0};
+  let total=0,filled=0,answerKeyOnly=0;
+  QUESTIONS.forEach(question=>{const analysis=derivedOptionAnalysis(question);question.options.forEach((option,index)=>{total++;const detail=analysis[optionId(option,index)];if(detail){filled++;if(String(detail).startsWith("答案对照："))answerKeyOnly++;}});});
+  return {total,filled,evidence:filled-answerKeyOnly,answerKeyOnly,pending:total-filled,rate:total?Math.round(filled/total*100):0};
 }
 
 function renderOptionAnalysis(question) {
@@ -677,7 +677,7 @@ function renderStats(){
   $("#reason-chart").innerHTML=counts.map(x=>`<div class="reason-row"><span>${x.r}</span><div class="reason-dotbar"><span style="width:${x.n/max*100}%"></span></div><b>${x.n}</b></div>`).join("");
   renderTrendPanel();renderSpeedPanel();renderFeedbackCenter();
   const optionCoverage=optionAnalysisCoverage();
-  $("#option-analysis-progress").innerHTML=`<div><strong>${optionCoverage.rate}%</strong><span>选项级解析覆盖率</span></div><div class="coverage-track"><span style="width:${optionCoverage.rate}%"></span></div><p>已补齐 ${optionCoverage.filled} / ${optionCoverage.total} 个选项；仍有 ${optionCoverage.pending} 个选项显示“待补充”，不会用推测内容冒充解析。</p>`;
+  $("#option-analysis-progress").innerHTML=`<div><strong>${optionCoverage.rate}%</strong><span>选项说明覆盖率</span></div><div class="coverage-track"><span style="width:${optionCoverage.rate}%"></span></div><p>已覆盖 ${optionCoverage.filled} / ${optionCoverage.total} 个选项：${optionCoverage.evidence} 个有原解析或逐项依据，${optionCoverage.answerKeyOnly} 个为明确标注的答案对照；仍有 ${optionCoverage.pending} 个待补充。</p>`;
   $("#report-sort").onchange=renderStats;
 }
 
