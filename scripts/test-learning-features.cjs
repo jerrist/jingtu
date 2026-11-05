@@ -59,6 +59,18 @@ const paper=engine.buildRulePaper("full-econ");
 assert.strictEqual(paper.questions.length,105);
 assert.strictEqual(paper.questions.reduce((sum,item)=>sum+item._examScore,0),140);
 
+const realBank=JSON.parse(fs.readFileSync("dist/data/questions.json","utf8"));
+engine.setQuestions(realBank.questions);
+const hrPaper=engine.buildRulePaper("full-hr");
+assert.strictEqual(hrPaper.questions.length,100,"HR full paper must contain 100 questions");
+assert.strictEqual(hrPaper.questions.reduce((sum,item)=>sum+item._examScore,0),140,"HR full paper must total 140 points");
+assert.strictEqual(hrPaper.questions.filter(item=>item._examSection==="单选题").length,60);
+assert.strictEqual(hrPaper.questions.filter(item=>item._examSection==="多选题").length,20);
+assert.strictEqual(hrPaper.questions.filter(item=>item._examSection==="案例分析题").length,20);
+assert.strictEqual(hrPaper.caseShortfall,0,"HR full paper must not substitute ordinary questions for case questions");
+assert.strictEqual(hrPaper.missing,0,"HR full paper must not have a question shortage");
+assert.strictEqual(new Set(hrPaper.questions.map(item=>item.id)).size,100,"HR full paper questions must be unique");
+
 const parsed=engine.derivedOptionAnalysis({options:[{id:"A"},{id:"B"}],answers:["A"],explanation:{summary:"选项 A 正确；选项 B 错误，因为混淆了概念。",optionAnalysis:{}}});
 assert.ok(parsed.A&&parsed.B,"explicit option reasons should be derived from summary");
 

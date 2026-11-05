@@ -1,11 +1,11 @@
 {
   "schemaVersion": "2.1.0",
-  "bankVersion": "local-20261104.495",
+  "bankVersion": "local-20261105.510",
   "syllabusVersion": "2026-demo",
   "locale": "zh-CN",
   "title": "经途中级经济师示例题库",
   "description": "产品功能验证用原创示例题库，尚未按正式考试大纲完成审核。",
-  "updatedAt": "2026-11-04",
+  "updatedAt": "2026-11-05",
   "questions": [
     {
       "id": "free-2024-hr-q001",
@@ -5526,6 +5526,347 @@
       ]
     },
     {
+      "id": "hr-case-2026-006",
+      "subject": "人力资源管理",
+      "chapter": "人员甄选",
+      "knowledgePoints": [
+        "评价中心技术"
+      ],
+      "type": "case-multiple",
+      "material": "某连锁企业计划选拔区域经理。该岗位需要协调多家门店、处理突发经营问题并带领跨地区团队。人力资源部准备综合使用结构化面试、无领导小组讨论、公文筐测试和人格测试，并在录用半年后跟踪实际绩效。",
+      "stem": "与区域经理岗位要求相比，评价中心技术的主要优势包括哪些？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "能够在接近真实工作的情境中观察行为"
+        },
+        {
+          "id": "B",
+          "text": "可以综合使用多种测评方法和多名评价者"
+        },
+        {
+          "id": "C",
+          "text": "能够完全消除评价者的主观判断"
+        },
+        {
+          "id": "D",
+          "text": "有助于评价管理和人际技能"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "评价中心通过情境模拟、多方法和多评价者观察候选人的管理行为，适合评价复杂管理能力，但不能完全消除主观判断。",
+        "keyPoint": "评价中心技术",
+        "memoryTip": "情境模拟、多法多评、观察管理行为。",
+        "optionAnalysis": {
+          "A": "正确。公文筐、无领导小组讨论等方法能够模拟实际管理情境。",
+          "B": "正确。评价中心强调多种方法与多名评价者的综合判断。",
+          "C": "错误。规范流程可以降低偏差，但无法完全消除人的判断。",
+          "D": "正确。评价中心适合观察领导、沟通、协调和问题解决等能力。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "评价中心"
+      ]
+    },
+    {
+      "id": "hr-case-2026-007",
+      "subject": "人力资源管理",
+      "chapter": "人员甄选",
+      "knowledgePoints": [
+        "结构化面试"
+      ],
+      "type": "case-single",
+      "material": "某连锁企业计划选拔区域经理。该岗位需要协调多家门店、处理突发经营问题并带领跨地区团队。人力资源部准备综合使用结构化面试、无领导小组讨论、公文筐测试和人格测试，并在录用半年后跟踪实际绩效。",
+      "stem": "为提高不同候选人面试结果的可比性，最关键的做法是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "允许面试官自由改变核心问题"
+        },
+        {
+          "id": "B",
+          "text": "统一问题、追问规则和评分标准"
+        },
+        {
+          "id": "C",
+          "text": "只记录面试官的总体印象"
+        },
+        {
+          "id": "D",
+          "text": "根据候选人的简历临时决定评分维度"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "结构化面试通过统一核心问题、追问规则和行为化评分标准提高一致性与可比性。",
+        "keyPoint": "结构化面试",
+        "memoryTip": "同题、同问、同标尺。",
+        "optionAnalysis": {
+          "A": "错误。自由改变核心问题会削弱候选人之间的可比性。",
+          "B": "正确。标准化问题和评分锚点是结构化面试的核心。",
+          "C": "错误。只凭总体印象容易产生首因效应等评价偏差。",
+          "D": "错误。评分维度应在工作分析基础上事先确定。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "结构化面试"
+      ]
+    },
+    {
+      "id": "hr-case-2026-008",
+      "subject": "人力资源管理",
+      "chapter": "人员甄选",
+      "knowledgePoints": [
+        "效标关联效度"
+      ],
+      "type": "case-single",
+      "material": "某连锁企业计划选拔区域经理。该岗位需要协调多家门店、处理突发经营问题并带领跨地区团队。人力资源部准备综合使用结构化面试、无领导小组讨论、公文筐测试和人格测试，并在录用半年后跟踪实际绩效。",
+      "stem": "将录用时的测评得分与半年后的实际绩效进行相关分析，主要是在检验？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "内容效度"
+        },
+        {
+          "id": "B",
+          "text": "构想效度"
+        },
+        {
+          "id": "C",
+          "text": "效标关联效度"
+        },
+        {
+          "id": "D",
+          "text": "内部一致性信度"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "测评结果与未来工作绩效这一外部效标之间的关系，属于效标关联效度中的预测效度。",
+        "keyPoint": "效标关联效度",
+        "memoryTip": "测评分数能否预测绩效，看效标关联效度。",
+        "optionAnalysis": {
+          "A": "错误。内容效度关注测评内容是否覆盖目标领域。",
+          "B": "错误。构想效度关注测评是否真正测量了预期心理构念。",
+          "C": "正确。实际绩效是外部效标，半年后的跟踪属于预测效度检验。",
+          "D": "错误。内部一致性信度考察测验内部各题目之间的一致程度。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "效度"
+      ]
+    },
+    {
+      "id": "hr-case-2026-009",
+      "subject": "人力资源管理",
+      "chapter": "人员甄选",
+      "knowledgePoints": [
+        "信度"
+      ],
+      "type": "case-multiple",
+      "material": "某连锁企业计划选拔区域经理。该岗位需要协调多家门店、处理突发经营问题并带领跨地区团队。人力资源部准备综合使用结构化面试、无领导小组讨论、公文筐测试和人格测试，并在录用半年后跟踪实际绩效。",
+      "stem": "为提高测评结果的信度，可以采取哪些措施？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "培训评价者并校准评分尺度"
+        },
+        {
+          "id": "B",
+          "text": "保持施测条件基本一致"
+        },
+        {
+          "id": "C",
+          "text": "减少评分规则，完全依靠直觉"
+        },
+        {
+          "id": "D",
+          "text": "对关键行为使用清晰的评分锚点"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "评价者培训、统一施测条件和清晰评分锚点都有助于减少随机误差、提高测评稳定性。",
+        "keyPoint": "信度",
+        "memoryTip": "条件稳、标尺清、评价者同尺度。",
+        "optionAnalysis": {
+          "A": "正确。培训和校准能提高不同评价者评分的一致性。",
+          "B": "正确。施测条件一致可减少环境造成的随机误差。",
+          "C": "错误。完全依靠直觉会增加评分波动。",
+          "D": "正确。行为锚点为评分提供稳定、可观察的依据。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "信度"
+      ]
+    },
+    {
+      "id": "hr-case-2026-010",
+      "subject": "人力资源管理",
+      "chapter": "人员甄选",
+      "knowledgePoints": [
+        "甄选工具组合"
+      ],
+      "type": "case-multiple",
+      "material": "某连锁企业计划选拔区域经理。该岗位需要协调多家门店、处理突发经营问题并带领跨地区团队。人力资源部准备综合使用结构化面试、无领导小组讨论、公文筐测试和人格测试，并在录用半年后跟踪实际绩效。",
+      "stem": "设计甄选方案时，人力资源部应遵循哪些原则？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "测评内容应来自岗位胜任要求"
+        },
+        {
+          "id": "B",
+          "text": "多种工具应提供互补信息"
+        },
+        {
+          "id": "C",
+          "text": "工具越多越好，无需考虑成本"
+        },
+        {
+          "id": "D",
+          "text": "持续用录用后的绩效数据验证工具"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "有效甄选应基于岗位要求，组合互补工具，并通过后续绩效持续验证；工具数量还要考虑成本与增量价值。",
+        "keyPoint": "甄选工具组合",
+        "memoryTip": "岗位为本、工具互补、绩效验证。",
+        "optionAnalysis": {
+          "A": "正确。工作分析和胜任要求决定需要测量什么。",
+          "B": "正确。互补工具能够从不同角度减少单一方法的局限。",
+          "C": "错误。工具应考虑效度、成本和新增信息价值，不是越多越好。",
+          "D": "正确。后续绩效数据可用于检验并改进甄选工具的预测效果。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "甄选方案"
+      ]
+    },
+    {
       "id": "h15",
       "subject": "人力资源管理",
       "chapter": "劳动关系",
@@ -5790,6 +6131,142 @@
       ]
     },
     {
+      "id": "hr-case-2026-019",
+      "subject": "人力资源管理",
+      "chapter": "战略性人力资源管理",
+      "knowledgePoints": [
+        "战略匹配"
+      ],
+      "type": "case-multiple",
+      "material": "某装备企业从单一产品转向多个解决方案业务。公司为重点项目组建跨职能团队，项目成员同时向职能经理和项目经理汇报；同时减少审批层级，鼓励研发、营销和交付人员共同解决客户问题。部分员工对双重汇报和新的协作方式感到不适应。",
+      "stem": "为支持解决方案业务战略，人力资源管理实践应进行哪些调整？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "招聘和培养跨职能协作能力"
+        },
+        {
+          "id": "B",
+          "text": "绩效指标同时关注客户结果与团队协作"
+        },
+        {
+          "id": "C",
+          "text": "奖励制度只强调个人局部产出"
+        },
+        {
+          "id": "D",
+          "text": "为项目经理和职能经理明确共同责任"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "人力资源实践要与解决方案战略和跨职能组织相匹配，包括能力、绩效、奖励和责任机制的协同。",
+        "keyPoint": "战略匹配",
+        "memoryTip": "战略要什么能力，HR 就选、育、评、奖什么。",
+        "optionAnalysis": {
+          "A": "正确。跨职能协作是执行解决方案战略所需的关键能力。",
+          "B": "正确。绩效指标应反映客户价值和跨部门共同结果。",
+          "C": "错误。只奖励局部个人产出可能破坏团队协作。",
+          "D": "正确。双重权力结构需要清晰的共同责任与协调机制。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "战略匹配"
+      ]
+    },
+    {
+      "id": "hr-case-2026-020",
+      "subject": "人力资源管理",
+      "chapter": "战略性人力资源管理",
+      "knowledgePoints": [
+        "人力资源管理效果评估"
+      ],
+      "type": "case-single",
+      "material": "某装备企业从单一产品转向多个解决方案业务。公司为重点项目组建跨职能团队，项目成员同时向职能经理和项目经理汇报；同时减少审批层级，鼓励研发、营销和交付人员共同解决客户问题。部分员工对双重汇报和新的协作方式感到不适应。",
+      "stem": "要判断跨职能团队建设是否真正支持业务战略，最有解释力的指标组合是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "培训场次和参训人数"
+        },
+        {
+          "id": "B",
+          "text": "人力资源部员工数量"
+        },
+        {
+          "id": "C",
+          "text": "协作行为改善与客户项目结果"
+        },
+        {
+          "id": "D",
+          "text": "办公用品费用"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "评价战略支持效果既要观察能力和行为是否改变，也要连接到客户、项目等业务结果。",
+        "keyPoint": "人力资源管理效果评估",
+        "memoryTip": "不只看做了多少，更要看行为改变和业务结果。",
+        "optionAnalysis": {
+          "A": "错误。培训活动量只能说明投入或过程，不能证明战略结果。",
+          "B": "错误。部门人数与跨职能协作效果没有直接对应关系。",
+          "C": "正确。该组合同时覆盖行为变化和业务结果，能够形成更完整的证据链。",
+          "D": "错误。办公用品费用不是本项战略人力资源实践的关键结果指标。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "效果评估"
+      ]
+    },
+    {
       "id": "h16",
       "subject": "人力资源管理",
       "chapter": "社会保险",
@@ -6051,6 +6528,211 @@
       "tags": [
         "管理幅度与管理层次",
         "人力资源管理"
+      ]
+    },
+    {
+      "id": "hr-case-2026-016",
+      "subject": "人力资源管理",
+      "chapter": "组织设计与组织文化",
+      "knowledgePoints": [
+        "矩阵组织形式"
+      ],
+      "type": "case-multiple",
+      "material": "某装备企业从单一产品转向多个解决方案业务。公司为重点项目组建跨职能团队，项目成员同时向职能经理和项目经理汇报；同时减少审批层级，鼓励研发、营销和交付人员共同解决客户问题。部分员工对双重汇报和新的协作方式感到不适应。",
+      "stem": "材料中的矩阵组织形式通常具有哪些特点？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "有利于跨职能资源协同"
+        },
+        {
+          "id": "B",
+          "text": "员工可能面对双重指挥"
+        },
+        {
+          "id": "C",
+          "text": "权责关系天然十分简单"
+        },
+        {
+          "id": "D",
+          "text": "项目经理与职能经理需要持续协调"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "矩阵结构兼顾职能专业化与项目协同，但双重权力系统会增加协调成本和角色冲突。",
+        "keyPoint": "矩阵组织形式",
+        "memoryTip": "双线汇报、跨职能协同、协调要求高。",
+        "optionAnalysis": {
+          "A": "正确。矩阵结构便于把不同职能资源配置到项目中。",
+          "B": "正确。成员通常同时接受职能和项目两条权力线的影响。",
+          "C": "错误。双重权力系统会使权责关系更复杂。",
+          "D": "正确。两类经理之间的沟通和权责协商是矩阵有效运行的关键。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "矩阵组织"
+      ]
+    },
+    {
+      "id": "hr-case-2026-017",
+      "subject": "人力资源管理",
+      "chapter": "组织设计与组织文化",
+      "knowledgePoints": [
+        "有机式组织"
+      ],
+      "type": "case-single",
+      "material": "某装备企业从单一产品转向多个解决方案业务。公司为重点项目组建跨职能团队，项目成员同时向职能经理和项目经理汇报；同时减少审批层级，鼓励研发、营销和交付人员共同解决客户问题。部分员工对双重汇报和新的协作方式感到不适应。",
+      "stem": "减少层级、强化横向沟通并鼓励灵活协作，更接近哪种组织特征？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "机械式组织"
+        },
+        {
+          "id": "B",
+          "text": "有机式组织"
+        },
+        {
+          "id": "C",
+          "text": "高度集权的直线制"
+        },
+        {
+          "id": "D",
+          "text": "单纯职能制"
+        }
+      ],
+      "answers": [
+        "B"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "有机式组织通常层级较少、分权程度较高、横向沟通充分，适合不确定和创新性环境。",
+        "keyPoint": "有机式组织",
+        "memoryTip": "少层级、重横向、较分权、适应变化。",
+        "optionAnalysis": {
+          "A": "错误。机械式组织更强调层级、正式规则和集权。",
+          "B": "正确。材料中的扁平化和跨职能协作符合有机式组织特征。",
+          "C": "错误。材料强调减少审批和共同解决问题，并非高度集权。",
+          "D": "错误。单纯职能制强调按专业职能分工，不能概括材料的跨职能协作。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "有机式组织"
+      ]
+    },
+    {
+      "id": "hr-case-2026-018",
+      "subject": "人力资源管理",
+      "chapter": "组织设计与组织文化",
+      "knowledgePoints": [
+        "组织变革阻力"
+      ],
+      "type": "case-multiple",
+      "material": "某装备企业从单一产品转向多个解决方案业务。公司为重点项目组建跨职能团队，项目成员同时向职能经理和项目经理汇报；同时减少审批层级，鼓励研发、营销和交付人员共同解决客户问题。部分员工对双重汇报和新的协作方式感到不适应。",
+      "stem": "为降低员工对组织变革的阻力，企业可以采取哪些措施？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "解释变革原因和目标"
+        },
+        {
+          "id": "B",
+          "text": "让受影响员工参与方案设计"
+        },
+        {
+          "id": "C",
+          "text": "为新角色提供培训和支持"
+        },
+        {
+          "id": "D",
+          "text": "隐瞒所有可能的岗位变化"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "充分沟通、员工参与以及培训支持能减少不确定感并提升变革能力；隐瞒信息通常会加剧猜疑。",
+        "keyPoint": "组织变革阻力",
+        "memoryTip": "讲清楚、让参与、给支持。",
+        "optionAnalysis": {
+          "A": "正确。理解变革必要性有助于减少认知上的抵触。",
+          "B": "正确。参与能够增强员工的控制感和方案认同。",
+          "C": "正确。培训和支持可缓解员工对能力不足的担忧。",
+          "D": "错误。信息不透明容易增加不确定性和不信任。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "组织变革"
       ]
     },
     {
@@ -6519,6 +7201,347 @@
       "tags": [
         "案例分析",
         "职位评价"
+      ]
+    },
+    {
+      "id": "hr-case-2026-011",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "要素计点法"
+      ],
+      "type": "case-single",
+      "material": "某科技企业重新设计薪酬体系。项目组先完成职位分析，再按知识技能、责任、工作复杂度和工作条件等要素为职位计点；同时开展市场薪酬调查，计划合并部分薪酬等级，并为研发岗位设置团队奖金。",
+      "stem": "项目组按多个报酬要素赋点并汇总的职位评价方法是？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "排序法"
+        },
+        {
+          "id": "B",
+          "text": "分类法"
+        },
+        {
+          "id": "C",
+          "text": "要素计点法"
+        },
+        {
+          "id": "D",
+          "text": "因素比较法"
+        }
+      ],
+      "answers": [
+        "C"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "将职位拆分为若干报酬要素，为各要素分级赋点并汇总，属于要素计点法。",
+        "keyPoint": "要素计点法",
+        "memoryTip": "拆要素、定等级、逐项计点。",
+        "optionAnalysis": {
+          "A": "错误。排序法直接比较职位整体价值并排序。",
+          "B": "错误。分类法将职位与预先定义的职位等级说明进行匹配。",
+          "C": "正确。材料完整描述了要素计点法的操作过程。",
+          "D": "错误。因素比较法以典型职位为基准，按要素分配工资率并比较。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "职位评价"
+      ]
+    },
+    {
+      "id": "hr-case-2026-012",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "市场薪酬调查"
+      ],
+      "type": "case-multiple",
+      "material": "某科技企业重新设计薪酬体系。项目组先完成职位分析，再按知识技能、责任、工作复杂度和工作条件等要素为职位计点；同时开展市场薪酬调查，计划合并部分薪酬等级，并为研发岗位设置团队奖金。",
+      "stem": "开展市场薪酬调查时，合理的做法包括哪些？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "选择与本企业有可比性的职位"
+        },
+        {
+          "id": "B",
+          "text": "明确薪酬口径和数据统计时点"
+        },
+        {
+          "id": "C",
+          "text": "只比较职位名称，不核对工作内容"
+        },
+        {
+          "id": "D",
+          "text": "同时关注基本工资和总薪酬等不同口径"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "市场薪酬调查要保证职位、口径和时点可比，并根据决策需要分析基本工资、奖金和总薪酬。",
+        "keyPoint": "市场薪酬调查",
+        "memoryTip": "职位可比、口径一致、时点明确。",
+        "optionAnalysis": {
+          "A": "正确。可比职位是市场数据能够用于定薪的前提。",
+          "B": "正确。不同统计口径或时点的数据不能直接比较。",
+          "C": "错误。相同职位名称可能对应不同职责，必须核对工作内容。",
+          "D": "正确。不同薪酬口径反映不同的外部竞争信息。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "薪酬调查"
+      ]
+    },
+    {
+      "id": "hr-case-2026-013",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "宽带式薪酬"
+      ],
+      "type": "case-multiple",
+      "material": "某科技企业重新设计薪酬体系。项目组先完成职位分析，再按知识技能、责任、工作复杂度和工作条件等要素为职位计点；同时开展市场薪酬调查，计划合并部分薪酬等级，并为研发岗位设置团队奖金。",
+      "stem": "合并薪酬等级、扩大每一等级薪酬浮动范围，可能带来的影响包括？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "支持员工在同一层级内拓展能力和职责"
+        },
+        {
+          "id": "B",
+          "text": "减少对频繁职位晋升的依赖"
+        },
+        {
+          "id": "C",
+          "text": "管理者的薪酬决策责任可能增加"
+        },
+        {
+          "id": "D",
+          "text": "自动保证所有员工薪酬绝对公平"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "宽带式薪酬减少等级、扩大带宽，有利于横向发展和灵活定薪，但也提高管理者判断要求，不能自动保证公平。",
+        "keyPoint": "宽带式薪酬",
+        "memoryTip": "等级少、带宽大、发展横向、管理责任重。",
+        "optionAnalysis": {
+          "A": "正确。较宽薪酬带支持员工通过能力和职责扩展获得薪酬成长。",
+          "B": "正确。员工不必每次都通过职位等级晋升才能获得薪酬提升。",
+          "C": "正确。较大定薪空间要求管理者承担更多判断与沟通责任。",
+          "D": "错误。公平仍依赖职位评价、绩效管理和透明规则。"
+        }
+      },
+      "difficulty": 3,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "宽带式薪酬"
+      ]
+    },
+    {
+      "id": "hr-case-2026-014",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "团队奖励计划"
+      ],
+      "type": "case-single",
+      "material": "某科技企业重新设计薪酬体系。项目组先完成职位分析，再按知识技能、责任、工作复杂度和工作条件等要素为职位计点；同时开展市场薪酬调查，计划合并部分薪酬等级，并为研发岗位设置团队奖金。",
+      "stem": "研发任务高度依赖成员协作时，采用团队奖金最直接的管理目的是什么？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "强化成员之间的合作"
+        },
+        {
+          "id": "B",
+          "text": "彻底消除搭便车现象"
+        },
+        {
+          "id": "C",
+          "text": "只奖励个人短期产出"
+        },
+        {
+          "id": "D",
+          "text": "替代全部基本工资"
+        }
+      ],
+      "answers": [
+        "A"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": false
+      },
+      "explanation": {
+        "summary": "当工作成果依赖团队协作时，团队奖励可使成员利益与共同结果相联系，强化合作。",
+        "keyPoint": "团队奖励计划",
+        "memoryTip": "共同结果配团队奖励。",
+        "optionAnalysis": {
+          "A": "正确。团队奖金把奖励与共同绩效挂钩，有利于协作。",
+          "B": "错误。团队奖励仍可能存在搭便车，需要配合贡献评价等机制。",
+          "C": "错误。只奖励个人短期产出与团队奖励的设计目的相反。",
+          "D": "错误。团队奖金通常是可变薪酬组成，不用于替代全部基本工资。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "medium",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "团队奖金"
+      ]
+    },
+    {
+      "id": "hr-case-2026-015",
+      "subject": "人力资源管理",
+      "chapter": "薪酬管理",
+      "knowledgePoints": [
+        "薪酬体系公平性"
+      ],
+      "type": "case-multiple",
+      "material": "某科技企业重新设计薪酬体系。项目组先完成职位分析，再按知识技能、责任、工作复杂度和工作条件等要素为职位计点；同时开展市场薪酬调查，计划合并部分薪酬等级，并为研发岗位设置团队奖金。",
+      "stem": "该薪酬体系同时兼顾内部公平与外部竞争力的措施包括？",
+      "media": [],
+      "options": [
+        {
+          "id": "A",
+          "text": "用职位评价建立内部职位价值关系"
+        },
+        {
+          "id": "B",
+          "text": "用市场薪酬调查校准外部水平"
+        },
+        {
+          "id": "C",
+          "text": "所有职位统一采用完全相同的薪酬数额"
+        },
+        {
+          "id": "D",
+          "text": "定期检查薪酬结构与人才市场变化"
+        }
+      ],
+      "answers": [
+        "A",
+        "B",
+        "D"
+      ],
+      "scoring": {
+        "score": 2,
+        "partialCredit": true
+      },
+      "explanation": {
+        "summary": "职位评价解决内部相对价值，市场调查解决外部竞争水平，定期复核用于保持体系适应性。",
+        "keyPoint": "薪酬体系公平性",
+        "memoryTip": "内部看职位，外部看市场，持续做校准。",
+        "optionAnalysis": {
+          "A": "正确。职位评价为不同职位的内部薪酬关系提供依据。",
+          "B": "正确。市场调查帮助判断企业薪酬的外部竞争位置。",
+          "C": "错误。不同职位价值和市场价格不同，统一金额并不等于公平。",
+          "D": "正确。职位和市场都会变化，薪酬结构需要定期检查。"
+        }
+      },
+      "difficulty": 2,
+      "frequency": "high",
+      "source": {
+        "kind": "original",
+        "title": "经途 2026 人力案例题补充批次 02",
+        "year": 2026,
+        "reference": null,
+        "page": null
+      },
+      "syllabusVersion": "2026",
+      "review": {
+        "status": "draft",
+        "reviewer": null,
+        "verifiedAt": null
+      },
+      "tags": [
+        "案例分析",
+        "薪酬公平"
       ]
     },
     {

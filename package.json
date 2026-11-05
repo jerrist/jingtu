@@ -1,6 +1,6 @@
 {
   "name": "jingtu-hr-economist",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "private": true,
   "description": "经途中级经济师本地题库与刷题工具",
   "scripts": {
