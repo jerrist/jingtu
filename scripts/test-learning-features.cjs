@@ -9,6 +9,8 @@ globalThis.__learningTest = {
   selectSmartQuestions,
   buildRulePaper,
   derivedOptionAnalysis,
+  selectQuizQuestions,
+  reviewQuestions,
   trendSeries,
   speedInsights,
   setState(value) { state = {...DEFAULT_STATE, ...value}; },
@@ -52,6 +54,14 @@ const questions = [
 engine.setQuestions(questions);
 engine.setState({records:{due:{attempts:1, wrong:1, due:"2000-01-01"}}, important:[], mastered:[]});
 assert.strictEqual(engine.selectSmartQuestions(questions, 1, "daily")[0].id, "due");
+
+const reviewBatch=[...Array(25)].map((_,i)=>({id:`review-${i}`}));
+assert.strictEqual(engine.selectQuizQuestions(reviewBatch,"review-batch",true).length,25,"review batch must keep the full filtered list");
+assert.strictEqual(engine.selectQuizQuestions(reviewBatch,"practice",true).length,20,"ordinary ordered practice keeps its existing limit");
+engine.setQuestions([{id:"wrong-a"},{id:"wrong-b"},{id:"due-c"}]);
+engine.setState({records:{"wrong-a":{wrong:1,reason:"概念混淆",due:"2999-01-01"},"wrong-b":{wrong:1,reason:"审题失误",due:"2999-01-01"},"due-c":{wrong:0,due:"2000-01-01"}},mastered:[]});
+assert.strictEqual(engine.reviewQuestions("全部").length,3,"review list should combine due and unmastered wrong questions");
+assert.strictEqual(engine.reviewQuestions("概念混淆")[0].id,"wrong-a","review batch should follow the active reason filter");
 
 const econQuestions=[...Array(70)].map((_,i)=>({id:`s${i}`,subject:"经济基础知识",type:"single"})).concat([...Array(35)].map((_,i)=>({id:`m${i}`,subject:"经济基础知识",type:"multiple"})));
 engine.setQuestions(econQuestions);

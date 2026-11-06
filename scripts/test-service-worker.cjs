@@ -32,7 +32,7 @@ const cache = {
 };
 const caches = {
   async open() { return cache; },
-  async keys() { return ["jingtu-v3", "jingtu-v4", "jingtu-v5", "jingtu-v7", "jingtu-v8", "jingtu-v9", "jingtu-v10", "unrelated-cache"]; },
+  async keys() { return ["jingtu-v3", "jingtu-v4", "jingtu-v5", "jingtu-v7", "jingtu-v8", "jingtu-v9", "jingtu-v10", "jingtu-v11", "unrelated-cache"]; },
   async delete(key) { deletedCaches.push(key); return true; },
   async match(key) { return cache.match(key); }
 };
@@ -98,7 +98,7 @@ function fetchEvent(request) {
   let activation = null;
   listeners.activate({waitUntil(value) { activation = Promise.resolve(value); }});
   await activation;
-  assert.deepStrictEqual(deletedCaches, ["jingtu-v3", "jingtu-v4", "jingtu-v5", "jingtu-v7", "jingtu-v8", "jingtu-v9", "jingtu-v10"], "activation must remove every stale app cache");
+  assert.deepStrictEqual(deletedCaches, ["jingtu-v3", "jingtu-v4", "jingtu-v5", "jingtu-v7", "jingtu-v8", "jingtu-v9", "jingtu-v10", "jingtu-v11"], "activation must remove every stale app cache");
 
   console.log("Service worker cache policy tests passed");
 })().catch(error => {

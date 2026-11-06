@@ -363,7 +363,7 @@ function speedInsights() {
 
 function persistPractice(nextIndex = activeQuiz?.index || 0) {
   if (!activeQuiz) return;
-  state.activePractice = {questionIds:activeQuiz.questions.map(q=>q.id), nextIndex, score:activeQuiz.score, mode:activeQuiz.mode, savedAt:Date.now()};
+  state.activePractice = {questionIds:activeQuiz.questions.map(q=>q.id), nextIndex, score:activeQuiz.score, incorrectIds:activeQuiz.incorrectIds || [], mode:activeQuiz.mode, savedAt:Date.now()};
   saveState();
 }
 
@@ -448,10 +448,16 @@ function renderPracticeSetupCounts() {
   $("#important-count").textContent = state.important.filter(id => QUESTIONS.some(q => q.id === id)).length;
 }
 
-function startQuiz({questions, mode="practice", resumeIndex=0, score=0, keepOrder=false}) {
+function selectQuizQuestions(questions, mode="practice", keepOrder=false) {
+  const pool = keepOrder ? [...questions] : shuffle(questions);
+  const limit = mode === "review-batch" ? pool.length : mode === "sprint" ? 20 : keepOrder ? 20 : 10;
+  return pool.slice(0, limit);
+}
+
+function startQuiz({questions, mode="practice", resumeIndex=0, score=0, incorrectIds=[], keepOrder=false}) {
   if (!questions.length) { toast("这个范围暂时没有可练习题目"); return; }
-  const selectedQuestions = keepOrder ? [...questions].slice(0, 20) : shuffle(questions).slice(0, mode === "sprint" ? 20 : 10);
-  activeQuiz = {questions:selectedQuestions, index:resumeIndex, score, answered:false, selected:[], mode, questionStartedAt:Date.now()};
+  const selectedQuestions = selectQuizQuestions(questions, mode, keepOrder);
+  activeQuiz = {questions:selectedQuestions, index:resumeIndex, score, incorrectIds:[...incorrectIds], answered:false, selected:[], mode, questionStartedAt:Date.now()};
   $("#practice-setup").classList.add("hidden"); $("#quiz-stage").classList.remove("hidden"); renderQuizQuestion();
   persistPractice(resumeIndex);
 }
@@ -461,7 +467,8 @@ function renderQuizQuestion() {
   activeQuiz.selected = [];
   activeQuiz.questionStartedAt=Date.now();
   const favorite = state.favorites.includes(q.id), important = state.important.includes(q.id), note = state.notes[q.id] || "";
-  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 暂停练习</button><span class="progress-text">第 ${index + 1} / ${questions.length} 题</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">难度 ${q.difficulty || 2}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div><div class="question-tools"><button class="question-tool ${favorite ? "active" : ""}" id="toggle-favorite">★ ${favorite ? "已收藏" : "收藏"}</button><button class="question-tool ${important ? "active" : ""}" id="toggle-important">⚑ ${important ? "重点题" : "标为重点"}</button><button class="question-tool" id="toggle-note">✎ 个人笔记</button><button class="question-tool" id="report-question">! 题目有误</button></div><div class="question-note ${note ? "" : "hidden"}" id="question-note"><textarea id="question-note-input" maxlength="1000" placeholder="写下你的理解、易错点或记忆方法">${note}</textarea></div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}${renderQuestionMedia(q, "material")}<h2>${q.stem}</h2>${renderQuestionMedia(q, "stem")}${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项后确认</div>` : ""}<div class="option-list">${q.options.map((o,i) => { const id=optionId(o,i); return `<button class="option" data-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`; }).join("")}</div>${isMultiple(q) ? `<div class="quiz-actions"><button class="primary-button" id="confirm-answer" disabled>确认答案 <span>→</span></button></div>` : ""}<div id="answer-feedback"></div></article></div>`;
+  const progressLabel = activeQuiz.mode === "review-batch" ? `错题连练 · 第 ${index + 1} / ${questions.length} 题` : `第 ${index + 1} / ${questions.length} 题`;
+  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="quiz-meta"><button class="ghost-button" id="quit-quiz">← 暂停练习</button><span class="progress-text">${progressLabel}</span></div><div class="quiz-progress"><span style="width:${(index/questions.length)*100}%"></span></div><article class="question-card"><div class="question-tags"><span class="question-tag">${q.subject}</span><span class="question-tag">${q.chapter}</span><span class="question-tag">${typeLabel(q)}</span><span class="question-tag">难度 ${q.difficulty || 2}</span>${rec.attempts ? `<span class="question-tag">已练 ${rec.attempts} 次</span>` : ""}</div><div class="question-tools"><button class="question-tool ${favorite ? "active" : ""}" id="toggle-favorite">★ ${favorite ? "已收藏" : "收藏"}</button><button class="question-tool ${important ? "active" : ""}" id="toggle-important">⚑ ${important ? "重点题" : "标为重点"}</button><button class="question-tool" id="toggle-note">✎ 个人笔记</button><button class="question-tool" id="report-question">! 题目有误</button></div><div class="question-note ${note ? "" : "hidden"}" id="question-note"><textarea id="question-note-input" maxlength="1000" placeholder="写下你的理解、易错点或记忆方法">${note}</textarea></div>${q.material ? `<div class="case-material"><b>案例材料</b><br>${q.material}</div>` : ""}${renderQuestionMedia(q, "material")}<h2>${q.stem}</h2>${renderQuestionMedia(q, "stem")}${isMultiple(q) ? `<div class="multi-hint">多选题 · 请选择所有正确选项后确认</div>` : ""}<div class="option-list">${q.options.map((o,i) => { const id=optionId(o,i); return `<button class="option" data-option="${id}"><span class="option-letter">${id}</span><span>${optionText(o)}</span></button>`; }).join("")}</div>${isMultiple(q) ? `<div class="quiz-actions"><button class="primary-button" id="confirm-answer" disabled>确认答案 <span>→</span></button></div>` : ""}<div id="answer-feedback"></div></article></div>`;
   $("#quit-quiz").onclick = () => quitQuiz(true);
   $("#toggle-favorite").onclick = event => { state.favorites=toggleId(state.favorites,q.id);saveState();event.currentTarget.classList.toggle("active");event.currentTarget.textContent=state.favorites.includes(q.id)?"★ 已收藏":"★ 收藏";renderPracticeSetupCounts(); };
   $("#toggle-important").onclick = event => { state.important=toggleId(state.important,q.id);saveState();event.currentTarget.classList.toggle("active");event.currentTarget.textContent=state.important.includes(q.id)?"⚑ 重点题":"⚑ 标为重点";renderPracticeSetupCounts(); };
@@ -482,11 +489,13 @@ function answerQuiz(selected) {
   if (activeQuiz.answered) return; activeQuiz.answered = true;
   const q = activeQuiz.questions[activeQuiz.index], correct = isCorrectAnswer(q, selected);
   if (correct) activeQuiz.score++;
+  else if (!activeQuiz.incorrectIds.includes(q.id)) activeQuiz.incorrectIds.push(q.id);
   const expected = answerIds(q);
   $$('[data-option]', $("#quiz-stage")).forEach((b) => { const id=b.dataset.option; b.disabled = true; if (expected.includes(id)) b.classList.add("correct"); if (selected.includes(id) && !expected.includes(id)) b.classList.add("wrong"); });
   if ($("#confirm-answer")) $("#confirm-answer").remove();
-  recordAnswer(q, correct, {durationMs:Date.now()-activeQuiz.questionStartedAt,mode:activeQuiz.mode,isReview:activeQuiz.mode==="review"});
-  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${expected.join("、")}。`}</h4><p>${explanationText(q)}</p>${renderQuestionMedia(q, "explanation")}${q.explanation?.memoryTip ? `<p><b>记忆提示：</b>${q.explanation.memoryTip}</p>` : ""}${renderOptionAnalysis(q)}${correct ? `<div class="memory-rating"><span>这题对你来说：</span><button class="memory-button" data-memory="hard">有点模糊</button><button class="memory-button" data-memory="good">掌握正常</button><button class="memory-button" data-memory="easy">非常轻松</button></div>` : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="question-tool" id="feedback-after-answer">! 反馈本题</button><button class="primary-button" id="next-question">${activeQuiz.index === activeQuiz.questions.length-1 ? "查看结果" : "下一题"} <span>→</span></button></div>`;
+  recordAnswer(q, correct, {durationMs:Date.now()-activeQuiz.questionStartedAt,mode:activeQuiz.mode,isReview:activeQuiz.mode.startsWith("review")});
+  const nextLabel = activeQuiz.index === activeQuiz.questions.length-1 ? "查看本轮结果" : activeQuiz.mode === "review-batch" ? "下一道错题" : "下一题";
+  $("#answer-feedback").innerHTML = `<div class="answer-panel ${correct ? "" : "bad"}"><h4>${correct ? "回答正确，很稳。" : `回答错误，正确答案是 ${expected.join("、")}。`}</h4><p>${explanationText(q)}</p>${renderQuestionMedia(q, "explanation")}${q.explanation?.memoryTip ? `<p><b>记忆提示：</b>${q.explanation.memoryTip}</p>` : ""}${renderOptionAnalysis(q)}${correct ? `<div class="memory-rating"><span>这题对你来说：</span><button class="memory-button" data-memory="hard">有点模糊</button><button class="memory-button" data-memory="good">掌握正常</button><button class="memory-button" data-memory="easy">非常轻松</button></div>` : `<div class="reason-prompt"><span>这次为什么会错？</span><div class="reason-buttons">${REASONS.map(r => `<button class="reason-button" data-reason="${r}">${r}</button>`).join("")}</div></div>`}</div><div class="quiz-actions"><button class="question-tool" id="feedback-after-answer">! 反馈本题</button><button class="primary-button" id="next-question">${nextLabel} <span>→</span></button></div>`;
   $$('[data-reason]').forEach(b => b.onclick = () => { $$('[data-reason]').forEach(x => x.classList.remove("active")); b.classList.add("active"); state.records[q.id].reason = b.dataset.reason; saveState(); toast("已记录错因"); });
   $$('[data-memory]').forEach(b => b.onclick = () => applyMemoryRating(q.id, b.dataset.memory));
   $("#feedback-after-answer").onclick = () => openFeedback(q);
@@ -555,10 +564,12 @@ function nextQuiz() {
   else renderQuizResult();
 }
 function renderQuizResult() {
-  const {score, questions} = activeQuiz, pct = Math.round(score/questions.length*100);
-  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="result-card"><div class="result-score"><strong>${pct}</strong><small>正确率</small></div><h2>${pct >= 80 ? "这一组掌握得不错" : pct >= 60 ? "基础已经有了，再巩固一下" : "薄弱点找到了，这就是进步的起点"}</h2><p>答对 ${score} 题，答错 ${questions.length-score} 题。错题已自动加入复习计划。</p><button class="primary-button" id="finish-quiz">返回练习中心 <span>→</span></button></div></div>`;
+  const {score, questions, incorrectIds, mode} = activeQuiz, pct = Math.round(score/questions.length*100), isReviewBatch = mode === "review-batch";
+  const retryQuestions = incorrectIds.map(id=>QUESTIONS.find(q=>q.id===id)).filter(Boolean);
+  $("#quiz-stage").innerHTML = `<div class="quiz-shell"><div class="result-card"><div class="result-score"><strong>${pct}</strong><small>正确率</small></div><h2>${isReviewBatch ? "这一轮错题已经全部重做" : pct >= 80 ? "这一组掌握得不错" : pct >= 60 ? "基础已经有了，再巩固一下" : "薄弱点找到了，这就是进步的起点"}</h2><p>答对 ${score} 题，答错 ${questions.length-score} 题。${isReviewBatch ? "仍错题目可以立即再练一轮。" : "错题已自动加入复习计划。"}</p><div class="quiz-actions">${isReviewBatch&&retryQuestions.length?`<button class="secondary-button" id="retry-review-batch">只重做仍错的 ${retryQuestions.length} 题</button>`:""}<button class="primary-button" id="finish-quiz">${isReviewBatch ? "返回错题本" : "返回练习中心"} <span>→</span></button></div></div></div>`;
   clearPracticeSession();
-  $("#finish-quiz").onclick = () => quitQuiz(false);
+  if ($("#retry-review-batch")) $("#retry-review-batch").onclick = () => startQuiz({questions:retryQuestions,mode:"review-batch",keepOrder:true});
+  $("#finish-quiz").onclick = () => { quitQuiz(false); if(isReviewBatch)switchView("review"); };
 }
 function quitQuiz(preserve = true) { if(!preserve)clearPracticeSession();activeQuiz = null; $("#quiz-stage").classList.add("hidden"); $("#practice-setup").classList.remove("hidden"); renderPracticeSetupCounts();renderHome(); }
 
@@ -569,13 +580,24 @@ function openFeedback(question) {
   $("#feedback-dialog").showModal();
 }
 
-function renderReview(filter="全部") {
+function reviewQuestions(filter="全部") {
   const wrong = wrongQuestions(), due = dueQuestions();
   const all = [...new Map([...due,...wrong].map(question=>[question.id,question])).values()];
+  return filter === "全部" ? all : filter === "到期复习" ? due : wrong.filter(q => (state.records[q.id].reason || "知识点不会") === filter);
+}
+
+function renderReview(filter="全部") {
+  const wrong = wrongQuestions(), due = dueQuestions();
   $("#wrong-summary").textContent = `${wrong.length} 道待掌握 · ${due.length} 道今日到期`;
   $("#reason-filters").innerHTML = ["全部", "到期复习", ...REASONS].map(r => `<button class="filter-chip ${r===filter?"active":""}" data-filter="${r}">${r}</button>`).join("");
   $$('[data-filter]').forEach(b => b.onclick = () => renderReview(b.dataset.filter));
-  const list = filter === "全部" ? all : filter === "到期复习" ? due : wrong.filter(q => (state.records[q.id].reason || "知识点不会") === filter);
+  const list = reviewQuestions(filter);
+  const batchBar = $("#review-batch-bar");
+  batchBar.classList.toggle("hidden", !list.length);
+  $("#review-batch-title").textContent = `${filter}范围 · ${list.length} 道题`;
+  $("#review-batch-copy").textContent = list.length > 1 ? "连续作答并保留解析；中断后可从首页继续。" : "当前范围只有 1 道题，也可以直接重做。";
+  $("#start-review-batch").innerHTML = `连续重做 ${list.length} 题 <span>→</span>`;
+  $("#start-review-batch").onclick = () => { switchView("practice"); startQuiz({questions:list,mode:"review-batch",keepOrder:true}); };
   $("#wrong-list").innerHTML = list.length ? list.map(q => { const r=state.records[q.id]; return `<article class="wrong-card"><div><span class="small-tag">${r.due <= localDate() ? "今日到期" : (r.reason || `记忆阶段 ${r.memoryStage || 0}`)}</span><h3>${q.stem}</h3><p>${q.subject} · ${q.chapter} · 已练 ${r.attempts || 0} 次 · ${r.due <= localDate() ? "现在复习" : `${r.due} 复习`}</p></div><button class="ghost-button" data-review-one="${q.id}">再做一次</button></article>`; }).join("") : `<div class="empty-state"><span>✓</span><b>复习任务已清空</b><p>新的复习题会根据你的记忆阶段自动出现。</p></div>`;
   $$('[data-review-one]').forEach(b => b.onclick = () => { switchView("practice"); startQuiz({questions:[QUESTIONS.find(q => q.id===b.dataset.reviewOne)],mode:"review"}); });
 }
@@ -720,7 +742,7 @@ async function init(){
   $("#start-sprint").onclick=()=>startQuiz({questions:sprintQuestions(),mode:"sprint",keepOrder:true});
   $("#practice-favorites").onclick=()=>{const pool=QUESTIONS.filter(q=>state.favorites.includes(q.id));if(!pool.length){toast("还没有收藏题目");return;}startQuiz({questions:pool,mode:"favorites"});};
   $("#practice-important").onclick=()=>{const pool=QUESTIONS.filter(q=>state.important.includes(q.id));if(!pool.length){toast("还没有重点题目");return;}startQuiz({questions:pool,mode:"important"});};
-  $("#resume-session").onclick=()=>{const saved=state.activePractice;if(!saved)return;const questions=saved.questionIds.map(id=>QUESTIONS.find(q=>q.id===id)).filter(Boolean);switchView("practice");startQuiz({questions,mode:saved.mode,resumeIndex:Math.min(saved.nextIndex,questions.length-1),score:saved.score||0,keepOrder:true});};
+  $("#resume-session").onclick=()=>{const saved=state.activePractice;if(!saved)return;const questions=saved.questionIds.map(id=>QUESTIONS.find(q=>q.id===id)).filter(Boolean);switchView("practice");startQuiz({questions,mode:saved.mode,resumeIndex:Math.min(saved.nextIndex,questions.length-1),score:saved.score||0,incorrectIds:saved.incorrectIds||[],keepOrder:true});};
   $("#discard-session").onclick=()=>{clearPracticeSession();renderHome();toast("已放弃上次练习");};
   $("#review-now").onclick=()=>switchView("review");
   $$('[data-exam-mode]').forEach(button=>button.onclick=()=>{$$('[data-exam-mode]').forEach(x=>x.classList.remove("selected"));button.classList.add("selected");selectedExamMode=button.dataset.examMode;});
